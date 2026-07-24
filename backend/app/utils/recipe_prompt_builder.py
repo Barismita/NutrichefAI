@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+
 def build_recipe_generation_prompt(
     ingredients: List[str],
     cuisine: Optional[str] = None,
@@ -9,17 +10,12 @@ def build_recipe_generation_prompt(
     additional_instructions: Optional[str] = None,
 ) -> str:
     parts = []
-    parts.append(
-        "You are an expert chef and nutritionist."
-    )
+    parts.append("You are an expert chef and nutritionist.")
     parts.append(
         "Generate ONE realistic recipe using ONLY the ingredients provided whenever possible."
     )
-    parts.append(
-        "Respond ONLY with valid JSON."
-    )
-    parts.append(
-        """
+    parts.append("Respond ONLY with valid JSON.")
+    parts.append("""
 The JSON must contain exactly these fields:
 
 {
@@ -40,8 +36,7 @@ The JSON must contain exactly these fields:
   },
   "image_prompt": ""
 }
-"""
-    )
+""")
     parts.append(f"Available ingredients: {', '.join(ingredients)}")
     if cuisine:
         parts.append(f"Cuisine: {cuisine}")
@@ -53,13 +48,7 @@ The JSON must contain exactly these fields:
         parts.append(f"Servings: {servings}")
     if additional_instructions:
         parts.append(f"Additional instructions: {additional_instructions}")
-    parts.append(
-        "Do not include markdown."
-    )
-    parts.append(
-        "Do not wrap the response inside ```."
-    )
-    parts.append(
-        "Return only the JSON object."
-    )
+    parts.append("Do not include markdown.")
+    parts.append("Do not wrap the response inside ```.")
+    parts.append("Return only the JSON object.")
     return "\n".join(parts)

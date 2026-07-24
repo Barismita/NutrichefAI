@@ -1,10 +1,12 @@
 from typing import List
+
 from fastapi import HTTPException
 
 from app.config.constants import USER_ID
 from app.models.pantry_model import Pantry
 
 USER_ID = USER_ID
+
 
 def normalize_ingredients(ingredients: List[str]) -> List[str]:
     seen = set()
@@ -18,9 +20,11 @@ def normalize_ingredients(ingredients: List[str]) -> List[str]:
             result.append(norm)
     return result
 
+
 async def get_pantry() -> Pantry:
     pantry = await Pantry.find_one(Pantry.user_id == USER_ID)
     return pantry
+
 
 async def create_or_update_pantry(ingredients: List[str]) -> Pantry:
     normalized = normalize_ingredients(ingredients)
@@ -35,6 +39,7 @@ async def create_or_update_pantry(ingredients: List[str]) -> Pantry:
         pantry = Pantry(user_id=USER_ID, ingredients=normalized)
         await pantry.insert()
     return pantry
+
 
 async def delete_ingredient(ingredient: str) -> Pantry:
     norm = ingredient.strip().lower()

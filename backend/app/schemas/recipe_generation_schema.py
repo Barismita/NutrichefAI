@@ -1,5 +1,7 @@
 from typing import List, Optional
+
 from pydantic import BaseModel, Field
+
 
 class RecipeGenerationRequest(BaseModel):
     ingredients: List[str] = Field(..., min_items=1)
@@ -9,11 +11,13 @@ class RecipeGenerationRequest(BaseModel):
     servings: Optional[int] = Field(None, gt=0)
     additional_instructions: Optional[str] = None
 
+
 class NutritionSchema(BaseModel):
     calories: float = Field(..., ge=0)
     protein: float = Field(..., ge=0)
     carbohydrates: float = Field(..., ge=0)
     fat: float = Field(..., ge=0)
+
 
 class RecipeGenerationResponse(BaseModel):
     title: str

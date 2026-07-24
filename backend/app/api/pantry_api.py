@@ -1,12 +1,14 @@
 from fastapi import APIRouter, status
+
 from app.schemas.pantry_schema import PantryRequest, PantryResponse
 from app.services.pantry_service import (
-    get_pantry,
     create_or_update_pantry,
     delete_ingredient,
+    get_pantry,
 )
 
 router = APIRouter(prefix="/pantry", tags=["Pantry"])
+
 
 @router.post(
     "",
@@ -18,6 +20,7 @@ async def post_pantry(request: PantryRequest):
     pantry = await create_or_update_pantry(request.ingredients)
     return PantryResponse(ingredients=pantry.ingredients)
 
+
 @router.get(
     "",
     response_model=PantryResponse,
@@ -28,6 +31,7 @@ async def get_pantry_route():
     if not pantry:
         return PantryResponse(ingredients=[])
     return PantryResponse(ingredients=pantry.ingredients)
+
 
 @router.delete(
     "/{ingredient}",

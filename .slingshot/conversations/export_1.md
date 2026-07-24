@@ -99,8 +99,8 @@ class RecipeResponse(RecipeBase):
 from typing import List, Optional
 from fastapi import HTTPException, status
 from beanie import PydanticObjectId
-from backend.app.models.recipe_model import Recipe
-from backend.app.schemas.recipe_schema import RecipeCreate, RecipeUpdate
+from app.models.recipe_model import Recipe
+from app.schemas.recipe_schema import RecipeCreate, RecipeUpdate
 
 async def create_recipe(data: RecipeCreate) -> Recipe:
     _validate_recipe_data(data)
@@ -175,8 +175,8 @@ def _validate_recipe_data_partial(data):
 from fastapi import APIRouter, Query, status
 from typing import List, Optional
 
-from backend.app.schemas.recipe_schema import RecipeCreate, RecipeUpdate, RecipeResponse
-from backend.app.services.recipe_service import (
+from app.schemas.recipe_schema import RecipeCreate, RecipeUpdate, RecipeResponse
+from app.services.recipe_service import (
     create_recipe, get_recipes, get_recipe, update_recipe, delete_recipe
 )
 
@@ -218,7 +218,7 @@ async def delete_recipe_endpoint(recipe_id: str):
 ```python::mongodb.py::backend/app/database/mongodb.py
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
-from backend.app.models.recipe_model import Recipe
+from app.models.recipe_model import Recipe
 
 async def init_db():
     client = AsyncIOMotorClient("mongodb+srv://<your-connection-string>")
@@ -233,8 +233,8 @@ async def init_db():
 ### 6. Register Router in main.py  
 ```python::main.py::backend/app/main.py
 from fastapi import FastAPI
-from backend.app.api.recipe_api import router as recipe_router
-from backend.app.database.mongodb import init_db
+from app.api.recipe_api import router as recipe_router
+from app.database.mongodb import init_db
 
 app = FastAPI()
 
@@ -251,7 +251,7 @@ app.include_router(recipe_router)
 ```python::test_recipe_api.py::backend/app/tests/test_recipe_api.py
 import pytest
 from httpx import AsyncClient
-from backend.app.main import app
+from app.main import app
 
 @pytest.mark.asyncio
 async def test_create_recipe():
@@ -402,11 +402,11 @@ def build_recipe_generation_prompt(
 import json
 from typing import Any, Dict
 from fastapi import HTTPException, status
-from backend.app.schemas.recipe_generation_schema import (
+from app.schemas.recipe_generation_schema import (
     RecipeGenerationRequest,
     RecipeGenerationResponse,
 )
-from backend.app.utils.prompt_builder import build_recipe_generation_prompt
+from app.utils.prompt_builder import build_recipe_generation_prompt
 
 # Placeholder for AI provider call; replace with actual provider logic
 async def call_ai_provider(prompt: str) -> str:
@@ -466,11 +466,11 @@ async def generate_recipe(request: RecipeGenerationRequest) -> RecipeGenerationR
 
 ```python::recipe_generation_api.py::backend/app/api/recipe_generation_api.py
 from fastapi import APIRouter, status
-from backend.app.schemas.recipe_generation_schema import (
+from app.schemas.recipe_generation_schema import (
     RecipeGenerationRequest,
     RecipeGenerationResponse,
 )
-from backend.app.services.recipe_generation_service import generate_recipe
+from app.services.recipe_generation_service import generate_recipe
 
 router = APIRouter(prefix="/recipes/generate", tags=["ai-recipe-generation"])
 
@@ -490,7 +490,7 @@ async def generate_recipe_endpoint(request: RecipeGenerationRequest):
 import pytest
 from httpx import AsyncClient
 from fastapi import FastAPI
-from backend.app.api.recipe_generation_api import router as ai_router
+from app.api.recipe_generation_api import router as ai_router
 
 app = FastAPI()
 app.include_router(ai_router)
@@ -513,7 +513,7 @@ async def test_generate_recipe_success(monkeypatch):
             "image_prompt": "Eggs and salt on a plate"
         }
         '''
-    from backend.app.services import recipe_generation_service
+    from app.services import recipe_generation_service
     monkeypatch.setattr(recipe_generation_service, "call_ai_provider", mock_call_ai_provider)
 
     async with AsyncClient(app=app, base_url="http://test") as ac:
@@ -544,7 +544,7 @@ async def test_generate_recipe_invalid_request():
 async def test_generate_recipe_provider_failure(monkeypatch):
     async def mock_call_ai_provider(prompt):
         raise Exception("Provider down")
-    from backend.app.services import recipe_generation_service
+    from app.services import recipe_generation_service
     monkeypatch.setattr(recipe_generation_service, "call_ai_provider", mock_call_ai_provider)
 
     async with AsyncClient(app=app, base_url="http://test") as ac:
@@ -559,7 +559,7 @@ async def test_generate_recipe_provider_failure(monkeypatch):
 async def test_generate_recipe_malformed_response(monkeypatch):
     async def mock_call_ai_provider(prompt):
         return "not a json"
-    from backend.app.services import recipe_generation_service
+    from app.services import recipe_generation_service
     monkeypatch.setattr(recipe_generation_service, "call_ai_provider", mock_call_ai_provider)
 
     async with AsyncClient(app=app, base_url="http://test") as ac:
@@ -575,9 +575,9 @@ async def test_generate_recipe_malformed_response(monkeypatch):
 
 ```python::main.py::backend/app/main.py
 from fastapi import FastAPI
-from backend.app.api.recipe_api import router as recipe_router
-from backend.app.api.recipe_generation_api import router as ai_recipe_router
-from backend.app.database.mongodb import init_db
+from app.api.recipe_api import router as recipe_router
+from app.api.recipe_generation_api import router as ai_recipe_router
+from app.database.mongodb import init_db
 
 app = FastAPI()
 

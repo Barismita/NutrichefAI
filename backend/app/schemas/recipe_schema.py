@@ -1,13 +1,16 @@
+from datetime import datetime
 from enum import Enum
 from typing import List, Optional
+
 from pydantic import BaseModel, Field
-from datetime import datetime
+
 
 class NutritionSchema(BaseModel):
     calories: float = Field(..., ge=0)
     protein: float = Field(..., ge=0)
     carbohydrates: float = Field(..., ge=0)
     fat: float = Field(..., ge=0)
+
 
 class RecipeBase(BaseModel):
     title: str = Field(..., min_length=1)
@@ -26,8 +29,10 @@ class RecipeBase(BaseModel):
         MEDIUM = "medium"
         HARD = "hard"
 
+
 class RecipeCreate(RecipeBase):
     pass
+
 
 class RecipeUpdate(BaseModel):
     title: Optional[str] = Field(None, min_length=1)
@@ -41,6 +46,7 @@ class RecipeUpdate(BaseModel):
     dietary_tags: Optional[List[str]] = None
     nutrition: Optional[NutritionSchema] = None
     image_url: Optional[str] = None
+
 
 class RecipeResponse(RecipeBase):
     id: str
