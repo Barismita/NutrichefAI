@@ -1,4 +1,5 @@
 from fastapi import APIRouter, status
+
 from app.schemas.recipe_generation_schema import (
     RecipeGenerationRequest,
     RecipeGenerationResponse,
@@ -10,6 +11,7 @@ router = APIRouter(
     tags=["AI Recipe Generation"],
 )
 
+
 @router.post(
     "/generate",
     response_model=RecipeGenerationResponse,
@@ -18,7 +20,7 @@ router = APIRouter(
     description="""
     Generate a recipe using the supplied ingredients and user preferences.
     The generated recipe is returned to the client and is not automatically saved.
-    """
+    """,
 )
 async def generate_recipe_endpoint(
     request: RecipeGenerationRequest,

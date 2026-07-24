@@ -1,15 +1,17 @@
-from datetime import datetime, UTC
+from datetime import UTC, datetime
 from enum import Enum
 from typing import List, Optional
 
 from beanie import Document
 from pydantic import BaseModel, Field
 
+
 class Nutrition(BaseModel):
     calories: float = Field(..., ge=0)
     protein: float = Field(..., ge=0)
     carbohydrates: float = Field(..., ge=0)
     fat: float = Field(..., ge=0)
+
 
 class Recipe(Document):
     title: str = Field(..., min_length=1)

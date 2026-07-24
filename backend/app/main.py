@@ -2,13 +2,12 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from app.config.settings import settings
-from app.database.mongodb import init_db
 from app.api.pantry_api import router as pantry_router
+from app.api.profile_api import router as profile_router
 from app.api.recipe_api import router as recipe_router
 from app.api.recipe_generation_api import router as ai_recipe_router
-
-
+from app.config.settings import settings
+from app.database.mongodb import init_db
 
 
 @asynccontextmanager
@@ -24,11 +23,10 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-
 app.include_router(pantry_router)
 app.include_router(recipe_router)
 app.include_router(ai_recipe_router)
-
+app.include_router(profile_router)
 
 
 @app.get("/")
