@@ -1,31 +1,63 @@
+# -----------------------------
 # Python
+# -----------------------------
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 *.egg-info/
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage/
+htmlcov/
 
-# Virtual Environment
+# -----------------------------
+# Virtual Environments
+# -----------------------------
 .venv/
 venv/
+backend/.venv/
 
-# Environment
+# -----------------------------
+# Environment Variables
+# -----------------------------
 .env
+.env.*
 
+# -----------------------------
 # IDE
+# -----------------------------
 .idea/
 .vscode/
 
+# -----------------------------
 # Node
+# -----------------------------
 node_modules/
+frontend/node_modules/
 dist/
+build/
 
-# Slingshot cache
+# -----------------------------
+# Slingshot Generated Cache
+# -----------------------------
 .slingshot/prompts-cache.json
 .slingshot/skills-cache.json
 .slingshot/memory.json
+
+# -----------------------------
+# Agent Cache
+# -----------------------------
 .agent/
 
+# -----------------------------
+# Logs
+# -----------------------------
+*.log
+
+# -----------------------------
 # OS
+# -----------------------------
 .DS_Store
 Thumbs.db
