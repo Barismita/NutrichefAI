@@ -1,12 +1,17 @@
 from typing import List
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class IngredientSubstitutionRequest(BaseModel):
-    """Request schema for ingredient substitution."""
+    ingredient: str = Field(..., min_length=1)
 
-    ingredient: str = Field(..., min_length=1, description="Ingredient to substitute")
+    @field_validator("ingredient")
+    @classmethod
+    def validate_ingredient(cls, value: str):
+        if not value.strip():
+            raise ValueError("Ingredient cannot be blank")
+        return value.strip()
 
 
 class IngredientSubstitutionResponse(BaseModel):

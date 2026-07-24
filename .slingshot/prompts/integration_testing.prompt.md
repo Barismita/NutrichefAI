@@ -376,7 +376,7 @@ pytest backend/app/tests/integration/ -v
 pytest backend/app/tests/integration/ --cov=backend/app/api --cov-report=html
 
 # Run specific test file
-pytest backend/app/tests/integration/test_recipe_api.py -v
+pytest backend/app/tests/integration/test_ingredient_substitution_api.py -v
 ```
 
 ## Expected Output

@@ -1,341 +1,274 @@
 ---
 name: "Pytest Unit Test Creation"
-description: "Guide creation of comprehensive unit tests with fixtures, mocking, and async patterns"
+description: "Generate comprehensive unit tests for the current NutriChef AI feature while following the existing project architecture and coding standards."
 category: "Testing"
-tags: ["testing", "pytest", "unit-tests", "mocking", "async"]
+tags: ["testing", "pytest", "unit-tests", "mocking", "async", "fastapi", "beanie"]
 ---
 
-## Objective
+# Objective
 
-Create comprehensive unit tests using pytest that validate business logic, handle edge cases, and achieve 80%+ code coverage.
+Generate comprehensive unit tests for the feature that has just been implemented.
 
-## Context
+The generated tests must integrate seamlessly with the existing NutriChef AI codebase instead of creating a generic project structure.
 
-**Tech Stack:**
-- Pytest for testing framework
-- pytest-asyncio for async tests
-- pytest-mock for mocking
-- pytest-cov for coverage reporting
+---
+
+# Project Context
+
+## Tech Stack
+
 - Python 3.11
+- FastAPI
+- MongoDB
+- Beanie ODM
+- Pydantic v2
+- Pytest
+- pytest-asyncio
+- pytest-mock
+- pytest-cov
 
-**Test Location:**
-- `backend/app/tests/unit/`
+---
 
-**Testing Principles:**
-- Test behavior, not implementation
-- Isolate units under test
-- Mock external dependencies
-- Test edge cases and errors
+## Current Project Structure
 
-## Instructions
-
-### Step 1: Set Up Test Structure
-
-**Directory Organization:**
 ```
-backend/app/tests/
-├── __init__.py
-├── conftest.py              # Shared fixtures
-├── unit/
-│   ├── __init__.py
-│   ├── test_recipe_service.py
-│   ├── test_pantry_service.py
-│   └── test_schemas.py
-└── integration/
-    ├── __init__.py
-    └── test_recipe_api.py
+backend/
+└── app/
+    ├── api/
+    ├── config/
+    ├── database/
+    ├── models/
+    ├── schemas/
+    ├── services/
+    ├── utils/
+    └── tests/
 ```
 
-### Step 2: Create Fixtures
+Generate tests using the existing package names and imports.
 
-**conftest.py:**
-```python
-import pytest
-from datetime import datetime
-from app.models.recipe import Recipe
-from app.schemas.recipe import RecipeCreate
+Do NOT invent new folders or rename existing modules.
 
-@pytest.fixture
-def sample_recipe_data():
-    """Sample recipe creation data."""
-    return RecipeCreate(
-        title="Test Recipe",
-        description="Test description",
-        ingredients=["flour", "sugar", "eggs"],
-        instructions="Mix and bake",
-        prep_time=15,
-        cook_time=30,
-        servings=4,
-        difficulty="medium"
-    )
+---
 
-@pytest.fixture
-def sample_recipe():
-    """Sample recipe document."""
-    return Recipe(
-        id="507f1f77bcf86cd799439011",
-        user_id="user123",
-        title="Test Recipe",
-        ingredients=["flour", "sugar", "eggs"],
-        instructions="Mix and bake",
-        prep_time=15,
-        cook_time=30,
-        servings=4,
-        difficulty="medium",
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow()
-    )
+# Instructions
 
-@pytest.fixture
-def mock_db(mocker):
-    """Mock database operations."""
-    return mocker.AsyncMock()
+## Understand the feature
+
+Before generating tests:
+
+- Analyse the implementation.
+- Understand the existing architecture.
+- Use the current codebase as the source of truth.
+- Do NOT assume services, exceptions or models that do not exist.
+
+---
+
+## Generate tests for
+
+Generate tests only for components modified by the current feature.
+
+Possible targets include:
+
+- Service layer
+- API endpoints
+- Pydantic schemas
+- Utility functions
+- AI services
+- Constants (where applicable)
+
+Only generate tests for files that actually exist.
+
+---
+
+## Testing Guidelines
+
+### Service Tests
+
+- Test successful execution
+- Test validation
+- Test error scenarios
+- Test edge cases
+- Mock all database operations
+- Mock all AI provider calls
+- Never connect to MongoDB
+
+---
+
+### API Tests
+
+Test:
+
+- Success responses
+- Invalid request payloads
+- Missing resources
+- HTTP status codes
+- Response schemas
+
+Use FastAPI TestClient or AsyncClient depending on the existing project.
+
+---
+
+### Schema Tests
+
+Validate:
+
+- Required fields
+- Optional fields
+- Invalid values
+- Field validation
+- Default values
+
+---
+
+### AI Tests
+
+For AI-related features:
+
+- Mock AI responses
+- Test successful AI output
+- Test empty responses
+- Test invalid inputs
+- Test fallback behaviour
+- Never call a real AI provider
+
+---
+
+### Constants
+
+If the feature uses constants (for example ingredient substitutions or profile categories):
+
+Test that:
+
+- Lookup works correctly
+- Input is case-insensitive (if implemented)
+- Unknown values return expected behaviour
+
+---
+
+# Test Design
+
+Every test should follow AAA:
+- Arrange
+- Act 
+- Assert
+
+Test behaviour rather than implementation.
+
+Use descriptive test names.
+
+One behaviour per test.
+
+Use fixtures whenever appropriate.
+
+Use parameterized tests where possible.
+
+---
+
+# Mocking Rules
+
+Always mock:
+
+- MongoDB
+- Beanie
+- AI providers
+- External services
+
+Never perform network requests.
+
+Never use a real database.
+
+---
+
+# Coverage
+
+Target:
+
+- 90%+ coverage for the modified feature.
+- 100% coverage for business logic whenever practical.
+
+Focus on meaningful coverage instead of simply increasing percentages.
+
+---
+
+# Deliverables
+
+Generate only the files required for the current feature.
+
+Examples:
+
+```
+tests/
+├── test_recipe_service.py
+├── test_profile_service.py
+├── test_pantry_service.py
+├── test_ai_service.py
+├── test_recipe_api.py
+├── test_profile_schema.py
+└── ...
 ```
 
-### Step 3: Write Service Layer Tests
+Do not regenerate tests for modules that have not changed.
 
-**test_recipe_service.py:**
-```python
-import pytest
-from unittest.mock import AsyncMock, MagicMock
-from app.services.recipe_service import RecipeService
-from app.schemas.recipe import RecipeCreate, RecipeUpdate
-from app.models.recipe import Recipe
-from app.exceptions import RecipeNotFoundException, UnauthorizedException
+---
+## IMPORTANT
 
-class TestRecipeService:
-    """Test suite for RecipeService."""
-    
-    @pytest.mark.asyncio
-    async def test_create_recipe_success(self, sample_recipe_data, mocker):
-        """Test successful recipe creation."""
-        # Arrange
-        user_id = "user123"
-        mock_insert = mocker.patch.object(Recipe, 'insert', new_callable=AsyncMock)
-        
-        # Act
-        recipe = await RecipeService.create_recipe(sample_recipe_data, user_id)
-        
-        # Assert
-        assert recipe.title == sample_recipe_data.title
-        assert recipe.user_id == user_id
-        assert len(recipe.ingredients) == 3
-        mock_insert.assert_called_once()
-    
-    @pytest.mark.asyncio
-    async def test_create_recipe_with_empty_ingredients_fails(self):
-        """Test recipe creation fails with empty ingredients."""
-        # Arrange
-        invalid_data = RecipeCreate(
-            title="Test",
-            ingredients=[],  # Empty list
-            instructions="Test",
-            prep_time=10,
-            cook_time=20,
-            servings=4
-        )
-        
-        # Act & Assert
-        with pytest.raises(ValueError, match="At least one ingredient"):
-            await RecipeService.create_recipe(invalid_data, "user123")
-    
-    @pytest.mark.asyncio
-    async def test_get_recipe_by_id_found(self, sample_recipe, mocker):
-        """Test retrieving existing recipe by ID."""
-        # Arrange
-        recipe_id = "507f1f77bcf86cd799439011"
-        mocker.patch.object(Recipe, 'get', new_callable=AsyncMock, return_value=sample_recipe)
-        
-        # Act
-        recipe = await RecipeService.get_recipe_by_id(recipe_id)
-        
-        # Assert
-        assert recipe is not None
-        assert recipe.id == recipe_id
-        assert recipe.title == "Test Recipe"
-    
-    @pytest.mark.asyncio
-    async def test_get_recipe_by_id_not_found(self, mocker):
-        """Test retrieving non-existent recipe returns None."""
-        # Arrange
-        mocker.patch.object(Recipe, 'get', new_callable=AsyncMock, return_value=None)
-        
-        # Act
-        recipe = await RecipeService.get_recipe_by_id("nonexistent_id")
-        
-        # Assert
-        assert recipe is None
-    
-    @pytest.mark.asyncio
-    async def test_update_recipe_success(self, sample_recipe, mocker):
-        """Test successful recipe update."""
-        # Arrange
-        recipe_id = sample_recipe.id
-        user_id = sample_recipe.user_id
-        update_data = RecipeUpdate(title="Updated Title")
-        
-        mocker.patch.object(Recipe, 'get', new_callable=AsyncMock, return_value=sample_recipe)
-        mock_save = mocker.patch.object(sample_recipe, 'save', new_callable=AsyncMock)
-        
-        # Act
-        updated_recipe = await RecipeService.update_recipe(recipe_id, update_data, user_id)
-        
-        # Assert
-        assert updated_recipe.title == "Updated Title"
-        mock_save.assert_called_once()
-    
-    @pytest.mark.asyncio
-    async def test_update_recipe_unauthorized(self, sample_recipe, mocker):
-        """Test update fails when user doesn't own recipe."""
-        # Arrange
-        recipe_id = sample_recipe.id
-        different_user_id = "different_user"
-        update_data = RecipeUpdate(title="Updated Title")
-        
-        mocker.patch.object(Recipe, 'get', new_callable=AsyncMock, return_value=sample_recipe)
-        
-        # Act & Assert
-        with pytest.raises(UnauthorizedException):
-            await RecipeService.update_recipe(recipe_id, update_data, different_user_id)
-    
-    @pytest.mark.asyncio
-    async def test_delete_recipe_success(self, sample_recipe, mocker):
-        """Test successful recipe deletion."""
-        # Arrange
-        recipe_id = sample_recipe.id
-        user_id = sample_recipe.user_id
-        
-        mocker.patch.object(Recipe, 'get', new_callable=AsyncMock, return_value=sample_recipe)
-        mock_delete = mocker.patch.object(sample_recipe, 'delete', new_callable=AsyncMock)
-        
-        # Act
-        await RecipeService.delete_recipe(recipe_id, user_id)
-        
-        # Assert
-        mock_delete.assert_called_once()
-    
-    @pytest.mark.asyncio
-    async def test_get_user_recipes_with_pagination(self, sample_recipe, mocker):
-        """Test retrieving user recipes with pagination."""
-        # Arrange
-        user_id = "user123"
-        mock_find = mocker.MagicMock()
-        mock_find.skip.return_value = mock_find
-        mock_find.limit.return_value = mock_find
-        mock_find.sort.return_value = mock_find
-        mock_find.to_list = AsyncMock(return_value=[sample_recipe])
-        
-        mocker.patch.object(Recipe, 'find', return_value=mock_find)
-        
-        # Act
-        recipes = await RecipeService.get_user_recipes(user_id, skip=0, limit=10)
-        
-        # Assert
-        assert len(recipes) == 1
-        assert recipes[0].user_id == user_id
-        mock_find.skip.assert_called_once_with(0)
-        mock_find.limit.assert_called_once_with(10)
-```
+Do NOT assume the project architecture.
 
-### Step 4: Write Schema Tests
+Before generating a single test:
 
-**test_schemas.py:**
-```python
-import pytest
-from pydantic import ValidationError
-from app.schemas.recipe import RecipeCreate, RecipeUpdate
+1. Read every referenced implementation file.
+2. Read every schema used by that implementation.
+3. Read every router.
+4. Use the implementation as the ONLY source of truth.
 
-class TestRecipeSchemas:
-    """Test suite for recipe schemas."""
-    
-    def test_recipe_create_valid_data(self):
-        """Test RecipeCreate with valid data."""
-        data = {
-            "title": "Test Recipe",
-            "ingredients": ["flour", "sugar"],
-            "instructions": "Mix and bake",
-            "prep_time": 15,
-            "cook_time": 30,
-            "servings": 4
-        }
-        recipe = RecipeCreate(**data)
-        assert recipe.title == "Test Recipe"
-        assert len(recipe.ingredients) == 2
-    
-    def test_recipe_create_empty_title_fails(self):
-        """Test RecipeCreate fails with empty title."""
-        with pytest.raises(ValidationError):
-            RecipeCreate(
-                title="",
-                ingredients=["flour"],
-                instructions="Test",
-                prep_time=10,
-                cook_time=20,
-                servings=4
-            )
-    
-    def test_recipe_create_negative_prep_time_fails(self):
-        """Test RecipeCreate fails with negative prep time."""
-        with pytest.raises(ValidationError):
-            RecipeCreate(
-                title="Test",
-                ingredients=["flour"],
-                instructions="Test",
-                prep_time=-10,
-                cook_time=20,
-                servings=4
-            )
-```
+If the implementation does not contain a class, function, endpoint, schema or exception, DO NOT invent one.
 
-### Step 5: Run Tests and Check Coverage
+Never generate code for hypothetical features.
 
-```bash
-# Run all unit tests
-pytest backend/app/tests/unit/ -v
+Never generate CRUD operations unless they already exist.
 
-# Run with coverage
-pytest backend/app/tests/unit/ --cov=backend/app --cov-report=html --cov-report=term-missing
+Never generate service classes unless they already exist.
 
-# Run specific test file
-pytest backend/app/tests/unit/test_recipe_service.py -v
+Never rename functions.
 
-# Run specific test
-pytest backend/app/tests/unit/test_recipe_service.py::TestRecipeService::test_create_recipe_success -v
-```
+Never rename schemas.
 
-## Expected Output
+Never rename endpoints.
 
-**Test Files:**
-- `backend/app/tests/unit/test_{module}_service.py`
-- `backend/app/tests/unit/test_{module}_schemas.py`
-- `backend/app/tests/conftest.py` with shared fixtures
+Never invent helper methods.
 
-**Test Coverage:**
-- >= 80% overall coverage
-- 100% coverage for critical business logic
-- All edge cases tested
-- Error scenarios covered
+Never invent internal attributes.
 
-## Constraints
+Never invent exceptions.
 
-- **MUST** use pytest framework
-- **MUST** use @pytest.mark.asyncio for async tests
-- **MUST** mock external dependencies (database, APIs)
-- **MUST** achieve 80%+ code coverage
-- **MUST** test edge cases and error scenarios
-- **MUST** use descriptive test names
-- **MUST** follow AAA pattern (Arrange, Act, Assert)
-- **MUST NOT** test implementation details
-- **MUST NOT** have tests depend on each other
-- **MUST NOT** use real database in unit tests
+Generate tests ONLY for the functions, routes and schemas that exist in the current implementation.
 
-## Notes
+-----
 
-- Use fixtures for reusable test data
-- Mock database operations with AsyncMock
-- Test one thing per test function
-- Use parametrize for testing multiple inputs
-- Keep tests fast (mock I/O operations)
-- Use clear assertion messages
-- Organize tests in classes by functionality
-- Run tests frequently during development
+# Constraints
+
+MUST
+
+- Use pytest
+- Use pytest-asyncio for async functions
+- Use pytest-mock
+- Follow the project's existing architecture
+- Match existing imports exactly
+- Generate production-quality tests
+
+MUST NOT
+
+- Invent classes or exceptions
+- Rename project modules
+- Create duplicate code
+- Use a real MongoDB instance
+- Use a real AI provider
+- Modify production code unless required to improve testability
+
+---
+
+# Expected Behaviour
+
+The generated tests should run successfully against the existing NutriChef AI project with minimal or no manual modifications.
+
+If additional fixtures or small refactoring are required to improve testability, explain why before generating the tests.
