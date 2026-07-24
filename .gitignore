@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+
+# Virtual Environment
+.venv/
+venv/
+
+# Environment
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# Node
+node_modules/
+dist/
+
+# Slingshot cache
+.slingshot/prompts-cache.json
+.slingshot/skills-cache.json
+.slingshot/memory.json
+.agent/
+
+# OS
+.DS_Store
+Thumbs.db
