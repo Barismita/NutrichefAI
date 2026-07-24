@@ -1,5 +1,5 @@
 USER_ID = "user123"
-PROFILE_TYPES = [
+PROFILE_CATEGORIES = [
     "Child",
     "Teen",
     "Gym Enthusiast",

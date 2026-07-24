@@ -145,13 +145,7 @@ class Profile(Document):
     user_id: Indexed(str) = Field(..., min_length=1, description="Owner user ID")
     profile_name: str = Field(..., min_length=1, max_length=50, description="Profile display name")
     profile_type: str = Field(..., description="Profile type/category")
-    dietary_preferences: Optional[List[str]] = Field(default_factory=list)
     allergies: Optional[List[str]] = Field(default_factory=list)
-    health_goal: Optional[str] = Field(default=None)
-    favorite_cuisines: Optional[List[str]] = Field(default_factory=list)
-    spice_level: Optional[str] = Field(default=None, description="e.g., Mild, Medium, Hot")
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
 
     class Settings:
         name = "profiles"
@@ -166,11 +160,7 @@ class Profile(Document):
                 "user_id": "user123",
                 "profile_name": "Healthy Dad",
                 "profile_type": "Weight Loss",
-                "dietary_preferences": ["Low Carb", "High Protein"],
                 "allergies": ["Peanuts"],
-                "health_goal": "Lose 10kg",
-                "favorite_cuisines": ["Italian", "Indian"],
-                "spice_level": "Medium",
             }
         }
 ```
@@ -818,13 +808,7 @@ class Profile(Document):
     """
     name: str = Field(..., min_length=1, max_length=50, description="Profile display name")
     category: str = Field(..., description="Profile category")
-    dietary_preferences: Optional[List[str]] = Field(default_factory=list)
     allergies: Optional[List[str]] = Field(default_factory=list)
-    health_goal: Optional[str] = Field(default=None)
-    favorite_cuisines: Optional[List[str]] = Field(default_factory=list)
-    spice_level: Optional[str] = Field(default=None, description="e.g., Mild, Medium, Hot")
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     class Settings:
         name = "profiles"
@@ -837,11 +821,7 @@ class Profile(Document):
             "example": {
                 "name": "Healthy Dad",
                 "category": "Working Professional",
-                "dietary_preferences": ["Low Carb", "High Protein"],
                 "allergies": ["Peanuts"],
-                "health_goal": "Lose 10kg",
-                "favorite_cuisines": ["Italian", "Indian"],
-                "spice_level": "Medium",
             }
         }
 ```
