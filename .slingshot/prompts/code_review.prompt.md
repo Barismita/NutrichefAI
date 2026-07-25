@@ -1,10 +1,3 @@
----
-name: "Comprehensive Code Review"
-description: "Guide systematic code review process covering quality, security, performance, and maintainability"
-category: "Code Quality"
-tags: ["code-review", "quality", "security", "best-practices"]
----
-
 ## Objective
 
 Perform a comprehensive code review that evaluates code quality, security vulnerabilities, performance issues, maintainability, and adherence to project standards.

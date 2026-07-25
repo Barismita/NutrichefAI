@@ -1,10 +1,3 @@
----
-name: "Pydantic v2 Schema Generation"
-description: "Guide creation of Pydantic v2 schemas for request/response validation with proper field validators"
-category: "Architecture & Design"
-tags: ["pydantic", "validation", "schema", "api"]
----
-
 ## Objective
 
 Create comprehensive Pydantic v2 schemas for API request validation and response serialization with custom validators, field constraints, and proper configuration.

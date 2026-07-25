@@ -1,10 +1,3 @@
----
-name: "Security Audit and Hardening"
-description: "Guide comprehensive security review covering authentication, authorization, input validation, and vulnerability prevention"
-category: "Documentation & Optimization"
-tags: ["security", "authentication", "authorization", "validation", "audit"]
----
-
 ## Objective
 
 Conduct a thorough security audit and implement hardening measures to protect against common vulnerabilities and ensure secure application operation.

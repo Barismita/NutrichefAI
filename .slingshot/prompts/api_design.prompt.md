@@ -1,10 +1,3 @@
----
-name: "RESTful API Endpoint Design"
-description: "Guide creation of well-structured FastAPI endpoints following REST principles and best practices"
-category: "Architecture & Design"
-tags: ["api", "fastapi", "rest", "endpoints", "http"]
----
-
 ## Objective
 
 Design and implement RESTful API endpoints using FastAPI that follow industry best practices, proper HTTP semantics, and Clean Architecture principles.

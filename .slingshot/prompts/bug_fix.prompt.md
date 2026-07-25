@@ -1,10 +1,3 @@
----
-name: "Structured Bug Fix Process"
-description: "Guide systematic bug resolution with root cause analysis, fix implementation, and regression prevention"
-category: "Code Quality"
-tags: ["bug-fix", "debugging", "testing", "root-cause-analysis"]
----
-
 ## Objective
 
 Systematically identify, analyze, fix, and verify bugs while preventing regressions and documenting the resolution process.
