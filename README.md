@@ -5,14 +5,12 @@ The project follows an AI-assisted Software Development Life Cycle (AI-SDLC), wi
 ---
 
 # Features
-- AI-powered recipe generation based on available ingredients
-- Pantry management and ingredient tracking
-- Ingredient substitution recommendations
-- Leftover meal suggestions to reduce food waste
-- Nutrition insights and healthier alternatives
+- Smart recipe generation from available ingredients 
+- Pantry tracking and ingredient management 
+- Ingredient substitution recommendations 
+- Leftover food rescue ideas 
+- Nutrition insights and healthy alternatives 
 - Step-by-step cooking assistance
-- RESTful API built with FastAPI
-- MongoDB data persistence using Beanie ODM
 
 ---
 # Tech Stack

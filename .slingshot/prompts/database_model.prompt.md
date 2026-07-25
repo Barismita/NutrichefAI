@@ -1,10 +1,3 @@
----
-name: "Beanie ODM Database Model Creation"
-description: "Guide creation of MongoDB document models using Beanie ODM with proper indexing and validation"
-category: "Architecture & Design"
-tags: ["database", "beanie", "mongodb", "model", "odm"]
----
-
 ## Objective
 
 Create well-structured Beanie ODM document models for MongoDB with proper field types, indexes, validation, and relationships.

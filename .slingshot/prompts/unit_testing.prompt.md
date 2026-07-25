@@ -1,10 +1,3 @@
----
-name: "Pytest Unit Test Creation"
-description: "Generate comprehensive unit tests for the current NutriChef AI feature while following the existing project architecture and coding standards."
-category: "Testing"
-tags: ["testing", "pytest", "unit-tests", "mocking", "async", "fastapi", "beanie"]
----
-
 # Objective
 
 Generate comprehensive unit tests for the feature that has just been implemented.

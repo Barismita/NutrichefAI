@@ -1,10 +1,3 @@
----
-name: "Recipe Management CRUD Operations"
-description: "Guide implementation of complete recipe management with search, filter, and relationship handling"
-category: "Feature Development"
-tags: ["recipe", "crud", "search", "relationships", "fastapi"]
----
-
 ## Objective
 
 Implement comprehensive recipe management functionality including CRUD operations, advanced search/filter capabilities, ingredient relationship management, and nutritional data integration.

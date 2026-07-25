@@ -1,10 +1,3 @@
----
-name: "AI-Powered Recipe Generation"
-description: "Guide integration of AI services for generating recipes based on available ingredients and preferences"
-category: "Feature Development"
-tags: ["ai", "external-api", "recipe", "generation", "integration"]
----
-
 ## Objective
 
 Implement AI-powered recipe generation that creates personalized recipes based on user's pantry items, dietary preferences, and cooking constraints using external AI APIs.

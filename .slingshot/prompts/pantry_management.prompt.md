@@ -1,10 +1,3 @@
----
-name: "Pantry Management Feature Development"
-description: "Guide creation of pantry tracking features with async MongoDB operations, RESTful API design, and Clean Architecture"
-category: "Feature Development"
-tags: ["pantry", "crud", "fastapi", "beanie", "mongodb"]
----
-
 ## Objective
 
 Implement a complete pantry management feature for NutriChef AI that allows users to track food items, quantities, expiration dates, and locations. The implementation must follow Clean Architecture principles with proper layer separation.

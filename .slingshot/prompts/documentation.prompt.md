@@ -1,10 +1,3 @@
----
-name: "Comprehensive Documentation Creation"
-description: "Guide creation of API documentation, code comments, README updates, and architecture decision records"
-category: "Documentation & Optimization"
-tags: ["documentation", "api-docs", "readme", "comments"]
----
-
 ## Objective
 
 Create comprehensive, clear, and maintainable documentation for APIs, code, architecture decisions, and project setup.

@@ -1,10 +1,3 @@
----
-name: "Performance Optimization"
-description: "Guide performance improvement through database optimization, caching, and async efficiency"
-category: "Documentation & Optimization"
-tags: ["performance", "optimization", "caching", "database", "async"]
----
-
 ## Objective
 
 Identify and resolve performance bottlenecks through database query optimization, efficient caching strategies, and proper async operation implementation.

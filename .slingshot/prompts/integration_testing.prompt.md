@@ -1,10 +1,3 @@
----
-name: "API Integration Test Creation"
-description: "Guide creation of end-to-end integration tests for FastAPI endpoints with database setup/teardown"
-category: "Testing"
-tags: ["testing", "integration", "api", "fastapi", "e2e"]
----
-
 ## Objective
 
 Create comprehensive integration tests that validate complete API workflows, including database operations, authentication, and end-to-end scenarios.

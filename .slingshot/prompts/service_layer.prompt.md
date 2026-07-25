@@ -1,10 +1,3 @@
----
-name: "Service Layer Business Logic Implementation"
-description: "Guide creation of service layer classes that encapsulate business logic and orchestrate operations"
-category: "Architecture & Design"
-tags: ["service", "business-logic", "clean-architecture", "async"]
----
-
 ## Objective
 
 Implement service layer classes that encapsulate business logic, orchestrate database operations, handle external integrations, and maintain Clean Architecture principles.

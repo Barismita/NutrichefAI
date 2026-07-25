@@ -1,10 +1,3 @@
----
-name: "Ingredient Substitution Recommendations"
-description: "Implement AI-powered ingredient substitution recommendations using the existing FastAPI architecture."
-category: "Feature Development"
-tags: ["ai", "fastapi", "ingredient-substitution", "recipes", "mongodb", "beanie"]
----
-
 # Feature: Ingredient Substitution Recommendations
 
 ## Goal

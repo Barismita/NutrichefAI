@@ -1,10 +1,3 @@
----
-name: "Code Refactoring Without Changing Functionality"
-description: "Guide code improvement through refactoring while maintaining existing functionality and test coverage"
-category: "Code Quality"
-tags: ["refactoring", "code-quality", "maintainability", "solid"]
----
-
 ## Objective
 
 Improve code structure, readability, and maintainability through refactoring without changing external behavior or breaking existing functionality.

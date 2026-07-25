@@ -1,17 +1,3 @@
----
-name: "User Profile Management"
-description: "Refactor the User Profile Management module to support single-user cooking profiles without authentication."
-category: "Backend Development"
-tags:
-  - fastapi
-  - beanie
-  - mongodb
-  - profile-management
-  - crud
-  - clean-architecture
-  - refactoring
----
-
 # User Profile Management Refactoring
 
 ## Objective
