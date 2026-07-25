@@ -1,0 +1,59 @@
+{
+  "filename": "profile_api.py",
+  "path": "backend/app/api/profile_api.py",
+  "version": "1.0",
+  "files": {
+    "profile_management": {
+      "value": [
+        {
+          "programming_language": "Markdown",
+          "fileName": "user_profile_management.prompt.md",
+          "relativeFilePath": ".slingshot/prompts/user_profile_management.prompt.md",
+          "startLine": [1],
+          "endLine": [150]
+        }
+      ]
+    },
+    "profile_module": {
+      "value": [
+        {
+          "programming_language": "Python",
+          "fileName": "profile_api.py",
+          "relativeFilePath": "backend/app/api/profile_api.py",
+          "startLine": [1],
+          "endLine": [150]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "profile_service.py",
+          "relativeFilePath": "backend/app/services/profile_service.py",
+          "startLine": [1],
+          "endLine": [200]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "profile_model.py",
+          "relativeFilePath": "backend/app/models/profile_model.py",
+          "startLine": [1],
+          "endLine": [150]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "profile_schema.py",
+          "relativeFilePath": "backend/app/schemas/profile_schema.py",
+          "startLine": [1],
+          "endLine": [150]
+        }
+      ]
+    }
+  },
+  "promptMessage": {
+    "profile_feature": {
+      "value": "Implement user profile management for NutriChef AI. Create Beanie models, Pydantic schemas, service layer, FastAPI endpoints and unit tests. Follow the existing project architecture and keep business logic inside the service layer."
+    }
+  },
+  "localPrompts": {},
+  "remotePrompts": {},
+  "figma": {},
+  "jira": {}
+}

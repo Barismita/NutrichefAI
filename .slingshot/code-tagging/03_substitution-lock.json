@@ -1,0 +1,14 @@
+{
+  "feature": "Ingredient Substitution",
+  "branch": "ingredient_substitution",
+  "status": "completed",
+  "files": [
+    "backend/app/api/recipe_api.py",
+    "backend/app/services/ai_service.py",
+    "backend/app/schemas/ingredient_substitution_schema.py",
+    "backend/tests/test_ingredient_substitution_api.py"
+  ],
+  "generatedBy": "Slingshot AI",
+  "lastAction": "Ingredient substitution feature completed, tested and merged into main",
+  "linkedPrompt": "ingredient_substitution.prompt.md"
+}

@@ -1,0 +1,59 @@
+{
+  "filename": "recipe_api.py",
+  "path": "backend/app/api/recipe_api.py",
+  "version": "1.0",
+  "files": {
+    "ingredient_substitution": {
+      "value": [
+        {
+          "programming_language": "Markdown",
+          "fileName": "ingredient_substitution.prompt.md",
+          "relativeFilePath": ".slingshot/prompts/ingredient_substitution.prompt.md",
+          "startLine": [1],
+          "endLine": [140]
+        }
+      ]
+    },
+    "substitution_module": {
+      "value": [
+        {
+          "programming_language": "Python",
+          "fileName": "recipe_api.py",
+          "relativeFilePath": "backend/app/api/recipe_api.py",
+          "startLine": [1],
+          "endLine": [220]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "ai_service.py",
+          "relativeFilePath": "backend/app/services/ai_service.py",
+          "startLine": [1],
+          "endLine": [120]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "ingredient_substitution_schema.py",
+          "relativeFilePath": "backend/app/schemas/ingredient_substitution_schema.py",
+          "startLine": [1],
+          "endLine": [120]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "test_ingredient_substitution_api.py",
+          "relativeFilePath": "backend/tests/test_ingredient_substitution_api.py",
+          "startLine": [1],
+          "endLine": [180]
+        }
+      ]
+    }
+  },
+  "promptMessage": {
+    "ingredient_substitution": {
+      "value": "Implement an ingredient substitution feature for NutriChef AI. Create request and response schemas, build the substitution service using the existing AIService, expose the functionality through a FastAPI endpoint, and write comprehensive unit tests. Ensure consistent validation, error handling, and coding standards across all layers."
+    }
+  },
+  "localPrompts": {},
+  "remotePrompts": {},
+  "figma": {},
+  "jira": {}
+}

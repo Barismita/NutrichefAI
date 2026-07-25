@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-07-26T18:00:00.000Z",
+  "user_memory": [],
+  "slingshot_memory": [
+    {
+      "id": "mem_001",
+      "content": "NutriChef AI backend is built using Python 3.11, FastAPI, MongoDB Atlas, and Beanie ODM.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_002",
+      "content": "The project follows a layered architecture with separate API, service, model, schema, and prompt builder modules.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_003",
+      "content": "Business logic should remain inside the service layer, while API routers should only handle requests and responses.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_004",
+      "content": "All AI-powered features reuse the shared AIProvider for model interactions.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_005",
+      "content": "Each AI feature should include a prompt builder, service, API, schema, and corresponding unit tests.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_006",
+      "content": "Pydantic v2 conventions and model_validate() should be used throughout the project.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_007",
+      "content": "FastAPI endpoints should use async functions, descriptive docstrings, response models, and proper HTTP status codes.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_008",
+      "content": "MongoDB collections are managed using Beanie document models and initialized during application startup.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_009",
+      "content": "All AI responses should be validated before being converted into response schemas.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_010",
+      "content": "Pytest with monkeypatch and AsyncClient is used for backend testing.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_011",
+      "content": "Prompt builders should return structured prompts that instruct the AI to generate valid JSON responses only.",
+      "isEnabled": true
+    },
+    {
+      "id": "mem_012",
+      "content": "Maintain consistent naming conventions and coding style across all backend modules.",
+      "isEnabled": true
+    }
+  ]
+}

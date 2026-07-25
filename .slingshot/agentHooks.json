@@ -1,0 +1,26 @@
+[
+  {
+    "id": "hook-code-review",
+    "name": "Python Code Review",
+    "description": "Review Python files for coding standards and best practices.",
+    "triggerType": "file_saved",
+    "filePaths": "backend/app/**/*.py",
+    "prompt": "Review the recently saved Python file. Check for PEP 8 compliance, FastAPI best practices, async programming, type hints, exception handling, Pydantic validation, Beanie ODM usage, code readability, and maintainability. Suggest improvements without changing the overall functionality."
+  },
+  {
+    "id": "hook-api-review",
+    "name": "API Review",
+    "description": "Validate FastAPI endpoints and API design.",
+    "triggerType": "file_saved",
+    "filePaths": "backend/app/api/**/*.py",
+    "prompt": "Review this FastAPI API implementation. Verify endpoint naming, request and response models, HTTP status codes, validation, exception handling, route consistency, and REST API best practices."
+  },
+  {
+    "id": "hook-test-review",
+    "name": "Unit Test Review",
+    "description": "Review unit tests for completeness and coverage.",
+    "triggerType": "file_saved",
+    "filePaths": "backend/tests/**/*.py",
+    "prompt": "Review the recently saved test file. Identify missing edge cases, validation scenarios, mocking improvements, assertion quality, and opportunities to improve test coverage."
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "filename": "main.py",
+  "path": "backend/app/main.py",
+  "version": "1.0",
+  "files": {
+    "backend_setup": {
+      "value": [
+        {
+          "programming_language": "Markdown",
+          "fileName": "backend_setup.prompt.md",
+          "relativeFilePath": ".slingshot/prompts/backend_setup.prompt.md",
+          "startLine": [1],
+          "endLine": [120]
+        }
+      ]
+    },
+    "application_entry": {
+      "value": [
+        {
+          "programming_language": "Python",
+          "fileName": "main.py",
+          "relativeFilePath": "backend/app/main.py",
+          "startLine": [1],
+          "endLine": [150]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "mongodb.py",
+          "relativeFilePath": "backend/app/database/mongodb.py",
+          "startLine": [1],
+          "endLine": [100]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "settings.py",
+          "relativeFilePath": "backend/app/config/settings.py",
+          "startLine": [1],
+          "endLine": [100]
+        }
+      ]
+    }
+  },
+  "promptMessage": {
+    "backend_initialization": {
+      "value": "Set up the NutriChef AI backend using FastAPI, MongoDB Atlas, Beanie ODM and Pydantic v2. Create the project structure, configure the MongoDB connection, initialize Beanie during application startup, register API routers, and follow a layered architecture with separate API, service, model and schema layers."
+    }
+  },
+  "localPrompts": {},
+  "remotePrompts": {},
+  "figma": {},
+  "jira": {}
+}
