@@ -1,39 +1,62 @@
 # NutriChef AI
-NutriChef AI is an AI-powered smart kitchen assistant that helps users make the most of the ingredients they already have. The application generates personalized recipes based on pantry inventory, dietary preferences, health goals, and budget while promoting healthier eating habits and reducing food waste.
-The project follows an AI-assisted Software Development Life Cycle (AI-SDLC), with Slingshot being used throughout the development process for planning, implementation, code review, testing, and documentation.
+
+NutriChef AI is an AI-powered smart kitchen assistant that helps users make the most of the ingredients they already
+have. The application generates personalized recipes based on pantry inventory, dietary preferences, health goals, and
+budget while promoting healthier eating habits and reducing food waste.
+
+The project follows an AI-assisted Software Development Life Cycle (AI-SDLC), with Slingshot being used throughout the
+development process for planning, implementation, code review, testing, and documentation.
 
 ---
 
 # Features
-- Smart recipe generation from available ingredients 
-- Pantry tracking and ingredient management 
-- Ingredient substitution recommendations 
-- Leftover food rescue ideas 
-- Nutrition insights and healthy alternatives 
+
+- Smart recipe generation from available ingredients
+- Pantry tracking and ingredient management
+- Ingredient substitution recommendations
+- Leftover food rescue ideas
+- Nutrition insights and healthy alternatives
 - Step-by-step cooking assistance
 
 ---
+
 # Tech Stack
+
 ## Frontend
-- React
+
+- React 19
+- Vite
 - React Router
+- Material UI (MUI)
 - Axios
 
 ## Backend
+
 - Python 3.11
 - FastAPI
 
 ## Database
 
-- MongoDB
+- MongoDB Atlas
 
 ## ODM
 
 - Beanie ODM
 
-## Testing
+## Testing & Code Quality
+
+### Backend
 
 - Pytest
+- Black
+- isort
+
+### Frontend
+
+- ESLint
+- Prettier
+- Husky
+- lint-staged
 
 ## AI-Assisted Development
 
@@ -47,21 +70,19 @@ The project follows an AI-assisted Software Development Life Cycle (AI-SDLC), wi
 NutriChefAI/
 │
 ├── backend/
-│   └── app/
-│       ├── api/
-│       ├── config/
-│       ├── database/
-│       ├── models/
-│       ├── schemas/
-│       ├── services/
-│       └── utils/
 │
 ├── frontend/
 │
+├── docs/
+│   ├── installation.md
+│   ├── development.md
+│   ├── architecture.md
+│   ├── backend.md
+│   ├── frontend.md
+│   ├── api.md
+│   └── slingshot.md
+│
 ├── .slingshot/
-│   ├── prompts/
-│   ├── skills/
-│   └── exports/
 │
 ├── slingshot-guidelines.md
 └── README.md
@@ -69,25 +90,15 @@ NutriChefAI/
 
 ---
 
-# Getting Started
+# Quick Start
 
 ## Prerequisites
 
 - Python 3.11+
 - Node.js 18+
-- MongoDB 6.0+
-- npm or yarn
+- MongoDB Atlas
 
-## Installation
-
-### Clone the repository
-
-```bash
-git clone <repository-url>
-cd NutriChefAI
-```
-
-### Backend Setup
+### Backend
 
 ```bash
 cd backend
@@ -97,131 +108,85 @@ python -m venv .venv
 # Windows
 .venv\Scripts\activate
 
-# macOS/Linux
+# macOS / Linux
 source .venv/bin/activate
 
 pip install -r requirements.txt
+
+python -m uvicorn app.main:app --reload
 ```
 
-### Frontend Setup
+Backend:
+
+- http://127.0.0.1:8000
+- Swagger: http://127.0.0.1:8000/docs
+
+### Frontend
 
 ```bash
 cd frontend
+
 npm install
+
+npm run dev
 ```
 
-### Environment Configuration
+Frontend:
 
-Create a `.env` file and configure the required environment variables.
+- http://localhost:5173
 
-### Run the Backend
-
-```bash
-uvicorn app.main:app --reload
-```
-
-### Run the Frontend
-
-```bash
-npm start
-```
-
-### Run Tests
-
-```bash
-pytest
-```
+For detailed installation instructions, see **docs/installation.md**.
 
 ---
 
-# AI-Assisted Development with Slingshot
+# Documentation
 
-Slingshot was used throughout the project to accelerate development while maintaining consistent engineering standards.
+| Guide           | Description                                            |
+|-----------------|--------------------------------------------------------|
+| installation.md | Project installation and initial setup                 |
+| development.md  | Development workflow, testing, formatting, and linting |
+| architecture.md | Overall system architecture                            |
+| backend.md      | Backend architecture and implementation details        |
+| frontend.md     | Frontend architecture, routing, and UI structure       |
+| api.md          | API documentation                                      |
+| slingshot.md    | AI-assisted development workflow using Slingshot       |
 
-## How Slingshot Was Used
+---
 
-- Feature planning and implementation
-- API, schema, and database model generation
-- Service layer implementation
-- Documentation generation
-- Code review and refactoring
-- Unit testing assistance
-- Development guidelines creation
+# AI-Assisted Development
 
-## Prompt Library
+NutriChef AI follows an AI-assisted SDLC using Slingshot throughout the project lifecycle.
 
-Reusable prompts are maintained under:
+Slingshot is used for:
 
-```text
-.slingshot/prompts/
-```
-
-These prompts provide standardized guidance for feature development, API design, testing, documentation, refactoring, and code reviews.
-
-## Skills Library
-
-Reusable AI skills are maintained under:
-
-```text
-.slingshot/skills/
-```
-
-The skills support common development activities including:
-
-- FastAPI API development
-- Beanie ODM model design
-- Pydantic schema generation
-- Service layer implementation
-- Code review
+- Feature planning
+- API design
+- Database model generation
+- Service implementation
+- Code reviews
+- Refactoring
 - Unit testing
 - Documentation
 
-## Development Workflow
-
-The project follows a repeatable AI-assisted workflow:
-
-1. Define feature requirements.
-2. Use Slingshot prompts for planning.
-3. Generate implementation.
-4. Review generated code.
-5. Write or update tests.
-6. Export development conversations.
-7. Commit changes.
-
-## Prompt Engineering Strategy
-
-Each prompt provides:
-
-- Project context
-- Tech stack
-- Target architecture layer
-- Existing file references
-- Coding standards
-- Expected outputs
-- Project-specific constraints
-
-This improves the consistency and quality of AI-generated code.
-
-## Benefits
-
-- Faster feature implementation
-- Consistent coding standards
-- Improved documentation quality
-- Reusable AI assets
-- Better code review process
-- Standardized development workflow
+Additional documentation is available in **docs/slingshot.md**.
 
 ---
 
 # Contributing
 
-Contributions are welcome. Please ensure all new code follows the project guidelines defined in `slingshot-guidelines.md` and includes appropriate tests and documentation.
+Contributions are welcome.
 
+Please ensure that all new code:
+
+- follows the project architecture
+- includes appropriate tests
+- adheres to the established coding standards
+- updates documentation where necessary
 
 ---
 
 # Acknowledgments
 
 - Built using **Slingshot AI** by **Publicis Sapient**
-- Powered by **FastAPI**, **React**, **MongoDB**, and **Beanie ODM**
+- Powered by **FastAPI**, **React**, **MongoDB Atlas**, and **Beanie ODM**
 - Developed following an AI-assisted Software Development Life Cycle (AI-SDLC)

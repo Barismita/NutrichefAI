@@ -1,1 +1,80 @@
-{ }
+{
+  "version": "1.0",
+  "prompts": [
+    {
+      "id": "prompt-ai-assistant",
+      "file": "ai_assistant.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-api-design",
+      "file": "api_design.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-backend-feature",
+      "file": "backend_feature.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-bug-fix",
+      "file": "bug_fix.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-cooking-guide",
+      "file": "cooking_guide.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-database-model",
+      "file": "database_model.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-documentation",
+      "file": "documentation.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-frontend-architecture",
+      "file": "frontend_architecture.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-frontend-component",
+      "file": "frontend_component.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-ingredient-substitution",
+      "file": "ingredient_substitution.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-leftover-rescue",
+      "file": "leftover_rescue.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-nutrition",
+      "file": "nutrition_and_alternatives.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-expiry-tracking",
+      "file": "track_expiry_date.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-unit-testing",
+      "file": "unit_testing.prompt.md",
+      "enabled": true
+    },
+    {
+      "id": "prompt-user-profile",
+      "file": "user_profile_management.prompt.md",
+      "enabled": true
+    }
+  ]
+}

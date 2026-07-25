@@ -1,94 +1,106 @@
-# NutriChef AI - Slingshot Development
+# Slingshot Configuration
 
-## Overview
+This directory contains the AI assets used to assist development of the NutriChef AI project.
 
-NutriChef AI was developed using Slingshot AI throughout the software development lifecycle. Slingshot was used to assist with project planning, backend architecture, implementation, documentation, testing, and code review while following the project's coding standards.
+## Structure
 
----
-
-## Project Information
-
-**Project:** NutriChef AI
-
-**Technology Stack**
-
-- Python 3.11
-- FastAPI
-- MongoDB
-- Beanie ODM
-- Pydantic v2
-- React
-- Async Programming
-
----
-
-## Slingshot Usage
-
-Slingshot was used for:
-
-- Feature planning
-- API design
-- Database model generation
-- Pydantic schema generation
-- Service layer implementation
-- FastAPI endpoint generation
-- Unit test generation
-- Documentation generation
-- Code review
-- Architecture guidance
-
----
-
-## Folder Structure
-
-```
+```text
 .slingshot/
 ├── prompts/
 ├── skills/
-├── code-tagging/
 ├── README.md
-├── agentHooks.json
 ├── memory.json
-├── prompts_cache.json
-└── skills_cache.json
+├── agentHooks.json
+├── prompts-cache.json
+└── skills-cache.json
 ```
-
----
 
 ## Prompts
 
-The `prompts/` directory contains the prompts used during development for implementing backend features and project documentation.
+Prompts define feature-specific tasks and provide context for implementing functionality.
 
 Examples include:
 
-- Recipe Management
-- Recipe Generation
-- User Profile Management
-- Nutrition Insights
-- AI Assistant
-- Cooking Guide
-- Leftover Food Rescue
-- Pantry Expiry Suggestions
-- Project Guidelines
+- Backend feature development
+- Frontend component creation
+- API design
+- Database modelling
+- Unit testing
+- Bug fixing
+- Feature-specific AI capabilities (Cooking Guide, Ingredient Substitution, etc.)
+
+Prompts should focus on **what** needs to be built.
 
 ---
 
 ## Skills
 
-The `skills/` directory contains reusable development skills used by Slingshot for consistent code generation across the project.
+Skills define reusable engineering knowledge that can be applied across multiple prompts.
 
-Examples include:
+Current skills include:
 
-- FastAPI API generation
-- Beanie model generation
-- Pydantic schema generation
-- Service layer implementation
-- Unit testing
+- AI Provider
+- Backend Development
+- Frontend Development
+- Database
+- API Design
+- Testing
+- Debugging
+- Code Review
 - Documentation
-- Code review
+
+Skills describe **how** implementation should be performed.
 
 ---
 
-## Purpose
+## Development Workflow
 
-The `.slingshot` directory captures how Slingshot AI was used during the development of NutriChef AI. It contains reusable prompts, project-specific skills, automated review hooks, and project memory that supported planning, implementation, testing, documentation, and code quality throughout backend development.
+A typical feature implementation follows this process:
+
+1. Review the relevant feature prompt.
+2. Load the required engineering skills.
+3. Design the API and data model.
+4. Implement backend functionality.
+5. Implement frontend functionality (if applicable).
+6. Test the implementation.
+7. Review the code.
+8. Update documentation.
+
+---
+
+## Design Principles
+
+- Keep prompts focused on features.
+- Keep skills generic and reusable.
+- Follow the project's layered architecture.
+- Prefer modular and maintainable code.
+- Update documentation whenever behaviour changes.
+
+---
+
+## Project Architecture
+
+NutriChef AI uses:
+
+### Backend
+
+- FastAPI
+- Python 3.11
+- MongoDB Atlas
+- Beanie ODM
+- Pydantic
+
+### Frontend
+
+- React 19
+- Vite
+- Material UI
+- React Router
+- Axios
+
+---
+
+## Objective
+
+The goal of this configuration is to support an AI-assisted Software Development Life Cycle (AI-SDLC) by providing
+consistent prompts, reusable engineering skills, and shared project context.
