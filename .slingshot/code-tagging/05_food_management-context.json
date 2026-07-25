@@ -1,0 +1,94 @@
+{
+  "filename": "leftover_api.py",
+  "path": "backend/app/api/leftover_api.py",
+  "version": "1.0",
+  "files": {
+    "food_management": {
+      "value": [
+        {
+          "programming_language": "Markdown",
+          "fileName": "leftover_food_rescue.prompt.md",
+          "relativeFilePath": ".slingshot/prompts/leftover_food_rescue.prompt.md",
+          "startLine": [1],
+          "endLine": [150]
+        },
+        {
+          "programming_language": "Markdown",
+          "fileName": "pantry_expiry_suggestions.prompt.md",
+          "relativeFilePath": ".slingshot/prompts/pantry_expiry_suggestions.prompt.md",
+          "startLine": [1],
+          "endLine": [150]
+        }
+      ]
+    },
+    "implementation": {
+      "value": [
+        {
+          "programming_language": "Python",
+          "fileName": "leftover_api.py",
+          "relativeFilePath": "backend/app/api/leftover_api.py",
+          "startLine": [1],
+          "endLine": [120]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "leftover_service.py",
+          "relativeFilePath": "backend/app/services/leftover_service.py",
+          "startLine": [1],
+          "endLine": [220]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "leftover_schema.py",
+          "relativeFilePath": "backend/app/schemas/leftover_schema.py",
+          "startLine": [1],
+          "endLine": [180]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "leftover_prompt_builder.py",
+          "relativeFilePath": "backend/app/utils/leftover_prompt_builder.py",
+          "startLine": [1],
+          "endLine": [180]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "expiry_api.py",
+          "relativeFilePath": "backend/app/api/expiry_api.py",
+          "startLine": [1],
+          "endLine": [120]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "expiry_service.py",
+          "relativeFilePath": "backend/app/services/expiry_service.py",
+          "startLine": [1],
+          "endLine": [220]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "expiry_schema.py",
+          "relativeFilePath": "backend/app/schemas/expiry_schema.py",
+          "startLine": [1],
+          "endLine": [180]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "expiry_prompt_builder.py",
+          "relativeFilePath": "backend/app/utils/expiry_prompt_builder.py",
+          "startLine": [1],
+          "endLine": [180]
+        }
+      ]
+    }
+  },
+  "promptMessage": {
+    "food_management_features": {
+      "value": "Implement the remaining AI-powered food management features for NutriChef AI. Create Leftover Food Rescue and Pantry Expiry Suggestions using the existing AIProvider. Each feature should include request and response schemas, prompt builders, service layer, FastAPI endpoints, validation, and comprehensive unit tests while maintaining consistency with the existing project architecture."
+    }
+  },
+  "localPrompts": {},
+  "remotePrompts": {},
+  "figma": {},
+  "jira": {}
+}

@@ -1,0 +1,25 @@
+{
+  "feature": "AI Features",
+  "branch": "ai-assistant",
+  "status": "completed",
+  "files": [
+    "backend/app/api/assistant_api.py",
+    "backend/app/services/assistant_service.py",
+    "backend/app/utils/assistant_prompt_builder.py",
+    "backend/app/api/cooking_guide_api.py",
+    "backend/app/services/cooking_guide_service.py",
+    "backend/app/api/nutrition_api.py",
+    "backend/app/services/nutrition_service.py",
+    "backend/app/services/ai_provider.py",
+    "backend/tests/test_ai_assistant.py",
+    "backend/tests/test_cooking_guide.py",
+    "backend/tests/test_nutrition.py"
+  ],
+  "generatedBy": "Slingshot AI",
+  "lastAction": "AI Assistant, Cooking Guide, Nutrition Analysis and Healthy Alternatives completed, tested and merged into main",
+  "linkedPrompt": [
+    "ai_assistant.prompt.md",
+    "step_by_step_cooking_assistance.prompt.md",
+    "insights_and_alternatives.prompt.md"
+  ]
+}

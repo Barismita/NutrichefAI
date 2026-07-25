@@ -1,0 +1,23 @@
+{
+  "feature": "Food Management AI Features",
+  "branch": "food-management",
+  "status": "completed",
+  "files": [
+    "backend/app/api/leftover_api.py",
+    "backend/app/services/leftover_service.py",
+    "backend/app/schemas/leftover_schema.py",
+    "backend/app/utils/leftover_prompt_builder.py",
+    "backend/app/api/expiry_api.py",
+    "backend/app/services/expiry_service.py",
+    "backend/app/schemas/expiry_schema.py",
+    "backend/app/utils/expiry_prompt_builder.py",
+    "backend/tests/test_leftover.py",
+    "backend/tests/test_expiry.py"
+  ],
+  "generatedBy": "Slingshot AI",
+  "lastAction": "Leftover Food Rescue and Pantry Expiry Suggestions implemented, tested and integrated into the backend",
+  "linkedPrompt": [
+    "leftover_food_rescue.prompt.md",
+    "pantry_expiry_suggestions.prompt.md"
+  ]
+}

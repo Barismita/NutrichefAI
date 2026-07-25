@@ -342,7 +342,7 @@ async def test_delete_recipe_with_valid_id_soft_deletes_recipe():
 ### Example 2: API Endpoint Integration Tests
 
 ```python
-# backend/app/tests/integration/test_ingredient_substitution_api.py
+# backend/app/tests/integration/test_ingredient_substitution.py
 import pytest
 from httpx import AsyncClient
 from app.main import app

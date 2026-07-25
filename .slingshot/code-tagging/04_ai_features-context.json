@@ -1,0 +1,101 @@
+{
+  "filename": "assistant_api.py",
+  "path": "backend/app/api/assistant_api.py",
+  "version": "1.0",
+  "files": {
+    "ai_modules": {
+      "value": [
+        {
+          "programming_language": "Markdown",
+          "fileName": "ai_assistant.prompt.md",
+          "relativeFilePath": ".slingshot/prompts/ai_assistant.prompt.md",
+          "startLine": [1],
+          "endLine": [140]
+        },
+        {
+          "programming_language": "Markdown",
+          "fileName": "step_by_step_cooking_assistance.prompt.md",
+          "relativeFilePath": ".slingshot/prompts/step_by_step_cooking_assistance.prompt.md",
+          "startLine": [1],
+          "endLine": [140]
+        },
+        {
+          "programming_language": "Markdown",
+          "fileName": "insights_and_alternatives.prompt.md",
+          "relativeFilePath": ".slingshot/prompts/insights_and_alternatives.prompt.md",
+          "startLine": [1],
+          "endLine": [160]
+        }
+      ]
+    },
+    "implementation": {
+      "value": [
+        {
+          "programming_language": "Python",
+          "fileName": "assistant_api.py",
+          "relativeFilePath": "backend/app/api/assistant_api.py",
+          "startLine": [1],
+          "endLine": [150]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "assistant_service.py",
+          "relativeFilePath": "backend/app/services/assistant_service.py",
+          "startLine": [1],
+          "endLine": [200]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "assistant_prompt_builder.py",
+          "relativeFilePath": "backend/app/utils/assistant_prompt_builder.py",
+          "startLine": [1],
+          "endLine": [150]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "cooking_guide_api.py",
+          "relativeFilePath": "backend/app/api/cooking_guide_api.py",
+          "startLine": [1],
+          "endLine": [150]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "cooking_guide_service.py",
+          "relativeFilePath": "backend/app/services/cooking_guide_service.py",
+          "startLine": [1],
+          "endLine": [200]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "nutrition_api.py",
+          "relativeFilePath": "backend/app/api/nutrition_api.py",
+          "startLine": [1],
+          "endLine": [150]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "nutrition_service.py",
+          "relativeFilePath": "backend/app/services/nutrition_service.py",
+          "startLine": [1],
+          "endLine": [220]
+        },
+        {
+          "programming_language": "Python",
+          "fileName": "ai_provider.py",
+          "relativeFilePath": "backend/app/services/ai_provider.py",
+          "startLine": [1],
+          "endLine": [150]
+        }
+      ]
+    }
+  },
+  "promptMessage": {
+    "ai_features": {
+      "value": "Implement AI-powered features for NutriChef AI including an AI Assistant, Step-by-Step Cooking Guide, Nutrition Analysis, and Healthy Alternatives. Reuse a shared AIProvider, create dedicated prompt builders for each feature, validate AI responses using Pydantic models, expose functionality through FastAPI endpoints, and write unit tests following the existing project architecture."
+    }
+  },
+  "localPrompts": {},
+  "remotePrompts": {},
+  "figma": {},
+  "jira": {}
+}
