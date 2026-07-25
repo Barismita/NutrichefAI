@@ -25,5 +25,10 @@ htmlcov/
 dist/
 build/
 
-# macOS
-.DS_Store
+#Frontend
+.agent/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
