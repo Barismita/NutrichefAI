@@ -1,1 +1,50 @@
-{ }
+{
+  "version": "1.0",
+  "skills": [
+    {
+      "id": "skill-ai-provider",
+      "file": "ai_provider_skill.md",
+      "enabled": true
+    },
+    {
+      "id": "skill-api-design",
+      "file": "api_design_skill.md",
+      "enabled": true
+    },
+    {
+      "id": "skill-backend",
+      "file": "backend_development.md",
+      "enabled": true
+    },
+    {
+      "id": "skill-frontend",
+      "file": "frontend_development.md",
+      "enabled": true
+    },
+    {
+      "id": "skill-database",
+      "file": "database_skill.md",
+      "enabled": true
+    },
+    {
+      "id": "skill-testing",
+      "file": "testing_skill.md",
+      "enabled": true
+    },
+    {
+      "id": "skill-debugging",
+      "file": "debugging_skill.md",
+      "enabled": true
+    },
+    {
+      "id": "skill-code-review",
+      "file": "code_review_skill.md",
+      "enabled": true
+    },
+    {
+      "id": "skill-documentation",
+      "file": "documentation_skill.md",
+      "enabled": true
+    }
+  ]
+}

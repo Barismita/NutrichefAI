@@ -22,5 +22,61 @@
     "triggerType": "file_saved",
     "filePaths": "backend/tests/**/*.py",
     "prompt": "Review the recently saved test file. Identify missing edge cases, validation scenarios, mocking improvements, assertion quality, and opportunities to improve test coverage."
+  },
+  {
+    "id": "hook-python-review",
+    "name": "Backend Code Review",
+    "description": "Review Python backend files for architecture, coding standards, and maintainability.",
+    "triggerType": "file_saved",
+    "filePaths": "backend/app/**/*.py",
+    "prompt": "Review the recently saved Python file. Verify FastAPI best practices, async programming, service-layer architecture, Beanie ODM usage, Pydantic validation, exception handling, naming conventions, code readability, and maintainability. Suggest improvements without changing functionality."
+  },
+  {
+    "id": "hook-api-review",
+    "name": "API Review",
+    "description": "Validate FastAPI API endpoints.",
+    "triggerType": "file_saved",
+    "filePaths": "backend/app/api/**/*.py",
+    "prompt": "Review this API implementation. Verify REST conventions, endpoint naming, request and response schemas, status codes, dependency injection, validation, exception handling, and consistency with existing APIs."
+  },
+  {
+    "id": "hook-service-review",
+    "name": "Service Layer Review",
+    "description": "Ensure business logic remains inside services.",
+    "triggerType": "file_saved",
+    "filePaths": "backend/app/services/**/*.py",
+    "prompt": "Review the service implementation. Verify business logic, separation of concerns, async operations, database interactions, reusable methods, error handling, and code quality."
+  },
+  {
+    "id": "hook-model-review",
+    "name": "Database Model Review",
+    "description": "Review Beanie models and Pydantic schemas.",
+    "triggerType": "file_saved",
+    "filePaths": "backend/app/models/**/*.py,backend/app/schemas/**/*.py",
+    "prompt": "Review the database model or schema. Verify field definitions, validation, indexes, naming conventions, default values, relationships, and adherence to Beanie and Pydantic best practices."
+  },
+  {
+    "id": "hook-react-review",
+    "name": "Frontend Review",
+    "description": "Review React components and pages.",
+    "triggerType": "file_saved",
+    "filePaths": "frontend/src/**/*.{js,jsx}",
+    "prompt": "Review the React implementation. Verify component reusability, state management, API usage, Material UI consistency, accessibility, responsive design, and maintainability."
+  },
+  {
+    "id": "hook-test-review",
+    "name": "Unit Test Review",
+    "description": "Review backend unit tests.",
+    "triggerType": "file_saved",
+    "filePaths": "backend/tests/**/*.py",
+    "prompt": "Review the test implementation. Identify missing edge cases, validation scenarios, mocking improvements, assertion quality, and opportunities to improve test coverage."
+  },
+  {
+    "id": "hook-documentation-review",
+    "name": "Documentation Review",
+    "description": "Keep documentation synchronized with implementation.",
+    "triggerType": "file_saved",
+    "filePaths": "**/*.md",
+    "prompt": "Review the documentation. Ensure it matches the implementation, follows project terminology, and includes any newly introduced functionality or architectural changes."
   }
 ]
