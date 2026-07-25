@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.api.assistant_api import router as assistant_router
 from app.api.pantry_api import router as pantry_router
 from app.api.profile_api import router as profile_router
 from app.api.recipe_api import router as recipe_router
@@ -27,6 +28,7 @@ app.include_router(pantry_router)
 app.include_router(recipe_router)
 app.include_router(ai_recipe_router)
 app.include_router(profile_router)
+app.include_router(assistant_router)
 
 
 @app.get("/")
