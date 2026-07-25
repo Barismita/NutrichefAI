@@ -4,6 +4,7 @@ from fastapi import FastAPI
 
 from app.api.assistant_api import router as assistant_router
 from app.api.cooking_guide_api import router as cooking_guide_router
+from app.api.leftover_api import router as leftover_router
 from app.api.nutrition_api import router as nutrition_router
 from app.api.pantry_api import router as pantry_router
 from app.api.profile_api import router as profile_router
@@ -33,6 +34,7 @@ app.include_router(profile_router)
 app.include_router(assistant_router)
 app.include_router(cooking_guide_router)
 app.include_router(nutrition_router)
+app.include_router(leftover_router)
 
 
 @app.get("/")
