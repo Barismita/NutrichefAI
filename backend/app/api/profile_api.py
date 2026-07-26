@@ -51,7 +51,7 @@ async def get_profile(profile_id: str):
     if not profile:
         raise HTTPException(
             status_code=404,
-            detail="Profile not found",
+            detail="Profiles not found",
         )
 
     return ProfileResponse.model_validate(profile)
@@ -73,7 +73,7 @@ async def update_profile(
     if not profile:
         raise HTTPException(
             status_code=404,
-            detail="Profile not found",
+            detail="Profiles not found",
         )
 
     return ProfileResponse.model_validate(profile)
@@ -89,5 +89,5 @@ async def delete_profile(profile_id: str):
     if not deleted:
         raise HTTPException(
             status_code=404,
-            detail="Profile not found",
+            detail="Profiles not found",
         )

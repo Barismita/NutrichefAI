@@ -1,7 +1,7 @@
 from datetime import datetime
 
 import pytest
-from fastapi import HTTPException, status
+from fastapi import status
 from httpx import ASGITransport, AsyncClient
 from pydantic import ValidationError
 
@@ -519,7 +519,7 @@ async def test_get_profile_not_found(monkeypatch):
         response = await client.get("/profiles/507f1f77bcf86cd799439011")
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
-    assert response.json()["detail"] == "Profile not found"
+    assert response.json()["detail"] == "Profiles not found"
 
 
 # ----------------------------------------------------------
@@ -582,7 +582,7 @@ async def test_update_profile_not_found(monkeypatch):
         )
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
-    assert response.json()["detail"] == "Profile not found"
+    assert response.json()["detail"] == "Profiles not found"
 
 
 # ----------------------------------------------------------
@@ -632,7 +632,7 @@ async def test_delete_profile_not_found(monkeypatch):
         response = await client.delete("/profiles/507f1f77bcf86cd799439011")
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
-    assert response.json()["detail"] == "Profile not found"
+    assert response.json()["detail"] == "Profiles not found"
 
 
 # ----------------------------------------------------------

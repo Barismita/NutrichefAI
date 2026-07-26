@@ -1,24 +1,19 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, HTTPException, status
 
-from app.schemas.pantry_schema import PantryRequest, PantryResponse
+from app.schemas.pantry_schema import (
+    Ingredient,
+    PantryResponse,
+)
 from app.services.pantry_service import (
-    create_or_update_pantry,
+    add_ingredient,
     delete_ingredient,
     get_pantry,
 )
 
-router = APIRouter(prefix="/pantry", tags=["Pantry"])
-
-
-@router.post(
-    "",
-    response_model=PantryResponse,
-    status_code=status.HTTP_200_OK,
-    summary="Create or update pantry",
+router = APIRouter(
+    prefix="/pantry",
+    tags=["Pantry"],
 )
-async def post_pantry(request: PantryRequest):
-    pantry = await create_or_update_pantry(request.ingredients)
-    return PantryResponse(ingredients=pantry.ingredients)
 
 
 @router.get(
@@ -28,16 +23,37 @@ async def post_pantry(request: PantryRequest):
 )
 async def get_pantry_route():
     pantry = await get_pantry()
-    if not pantry:
+
+    if pantry is None:
         return PantryResponse(ingredients=[])
+
+    return PantryResponse(ingredients=pantry.ingredients)
+
+
+@router.post(
+    "",
+    response_model=PantryResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+async def add_ingredient_route(request: Ingredient):
+    pantry = await add_ingredient(request)
     return PantryResponse(ingredients=pantry.ingredients)
 
 
 @router.delete(
-    "/{ingredient}",
+    "/{ingredient_name}",
     response_model=PantryResponse,
-    summary="Delete ingredient from pantry",
+    summary="Delete ingredient",
 )
-async def delete_ingredient_route(ingredient: str):
-    pantry = await delete_ingredient(ingredient)
-    return PantryResponse(ingredients=pantry.ingredients)
+async def delete_ingredient_route(ingredient_name: str):
+    pantry = await delete_ingredient(ingredient_name)
+
+    if pantry is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Pantry not found",
+        )
+
+    return PantryResponse(
+        ingredients=pantry.ingredients,
+    )

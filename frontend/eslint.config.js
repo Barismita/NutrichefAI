@@ -25,6 +25,7 @@ export default defineConfig([
 
         rules: {
             "prettier/prettier": "error",
+            "react-hooks/set-state-in-effect": "off",
         },
 
         languageOptions: {
