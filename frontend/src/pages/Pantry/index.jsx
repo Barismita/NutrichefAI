@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Alert, Snackbar } from "@mui/material";
 
-import { LoadingSpinner, EmptyState, PageHeader, SectionCard } from "../../components/common";
+import { Alert, Box, Snackbar, Paper, Typography, Button } from "@mui/material";
 
-import { getPantry, savePantry } from "../../api";
+import { EmptyState, LoadingSpinner, PageHeader, SectionCard } from "../../components/common";
 
-import PantryToolbar from "./PantryToolbar";
-import PantryTable from "./PantryTable";
+import { getPantry, savePantry, deleteIngredient } from "../../api";
+
 import IngredientDialog from "./IngredientDialog";
+import PantryTable from "./PantryTable";
+import PantryToolbar from "./PantryToolbar";
+import DeleteDialog from "./DeleteDialog";
+import IngredientForm from "./IngredientForm";
 
 export default function Pantry() {
     const [pantry, setPantry] = useState([]);
@@ -18,9 +21,12 @@ export default function Pantry() {
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const [editingIngredient, setEditingIngredient] = useState(null);
+    const [deleteOpen, setDeleteOpen] = useState(false);
+    const [selectedIngredient, setSelectedIngredient] = useState(null);
 
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
     const filteredPantry = useMemo(() => {
         if (!search.trim()) {
@@ -39,9 +45,7 @@ export default function Pantry() {
 
             const response = await getPantry();
 
-            const ingredients = response?.ingredients || [];
-
-            setPantry(ingredients);
+            setPantry(response?.ingredients || []);
         } catch (err) {
             console.error(err);
             setError("Failed to load pantry.");
@@ -72,11 +76,45 @@ export default function Pantry() {
 
             handleClose();
 
+            setSnackbarSeverity("success");
             setSnackbarMessage(`${ingredient.name} added successfully.`);
             setSnackbarOpen(true);
-        } catch (err) {
-            console.error(err);
-            setError("Failed to save ingredient.");
+        } catch (error) {
+            console.error(error);
+
+            setSnackbarSeverity("error");
+
+            setSnackbarMessage(error.response?.data?.detail ?? "Failed to save ingredient.");
+
+            setSnackbarOpen(true);
+        }
+    };
+
+    const handleDeleteClick = (ingredient) => {
+        setSelectedIngredient(ingredient);
+        setDeleteOpen(true);
+    };
+
+    const handleDelete = async () => {
+        try {
+            await deleteIngredient(selectedIngredient.name);
+
+            await loadPantry();
+
+            setDeleteOpen(false);
+            setSelectedIngredient(null);
+
+            setSnackbarSeverity("success");
+            setSnackbarMessage(`${selectedIngredient.name} deleted successfully.`);
+
+            setSnackbarOpen(true);
+        } catch (error) {
+            console.error(error);
+
+            setSnackbarSeverity("error");
+            setSnackbarMessage(error.response?.data?.detail ?? "Failed to delete ingredient.");
+
+            setSnackbarOpen(true);
         }
     };
 
@@ -85,33 +123,129 @@ export default function Pantry() {
     }
 
     return (
-        <>
-            <PageHeader title="Pantry" subtitle="Manage your kitchen ingredients." />
-
+        <Box
+            sx={{
+                background: "linear-gradient(180deg,#F6FBF4 0%,#FFFFFF 100%)",
+                minHeight: "100vh",
+                p: 4,
+            }}
+        >
             {error && (
-                <Alert severity="error" sx={{ mb: 2 }}>
+                <Alert
+                    severity="error"
+                    sx={{
+                        mb: 3,
+                        borderRadius: 2,
+                    }}
+                >
                     {error}
                 </Alert>
             )}
 
-            <SectionCard>
+            <SectionCard
+                sx={{
+                    p: 4,
+                    borderRadius: 4,
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        gap: 2,
+                        mb: 4,
+                        flexWrap: "wrap",
+                    }}
+                >
+                    <Paper
+                        elevation={1}
+                        sx={{
+                            flex: 1,
+                            p: 2,
+                            borderRadius: 3,
+                        }}
+                    >
+                        <Typography variant="h5">📦 {pantry.length}</Typography>
+
+                        <Typography color="text.secondary">Ingredients</Typography>
+                    </Paper>
+
+                    <Paper
+                        elevation={1}
+                        sx={{
+                            flex: 1,
+                            p: 2,
+                            borderRadius: 3,
+                        }}
+                    >
+                        <Typography variant="h5">
+                            🥬 {new Set(pantry.map((i) => i.category)).size}
+                        </Typography>
+
+                        <Typography color="text.secondary">Categories</Typography>
+                    </Paper>
+
+                    <Paper
+                        elevation={1}
+                        sx={{
+                            flex: 1,
+                            p: 2,
+                            borderRadius: 3,
+                        }}
+                    >
+                        <Typography variant="h5">
+                            ⏰ {pantry.filter((i) => i.expiry_date).length}
+                        </Typography>
+
+                        <Typography color="text.secondary">With Expiry</Typography>
+                    </Paper>
+                </Box>
                 <PantryToolbar search={search} setSearch={setSearch} onAdd={handleAdd} />
 
                 {filteredPantry.length === 0 ? (
-                    <EmptyState
-                        title="No Ingredients"
-                        description="Add your first ingredient to get started."
-                    />
+                    <Box
+                        sx={{
+                            py: 8,
+                            textAlign: "center",
+                        }}
+                    >
+                        <Typography variant="h1" sx={{ mb: 2 }}>
+                            🥕
+                        </Typography>
+
+                        <Typography variant="h4" fontWeight={600}>
+                            Your pantry is empty
+                        </Typography>
+
+                        <Typography color="text.secondary" sx={{ mt: 1 }}>
+                            Add your first ingredient and start building your smart kitchen.
+                        </Typography>
+
+                        <Button sx={{ mt: 4 }} variant="contained" onClick={handleAdd}>
+                            Add Ingredient
+                        </Button>
+                    </Box>
                 ) : (
-                    <PantryTable ingredients={filteredPantry} />
+                    <PantryTable ingredients={filteredPantry} onDelete={handleDeleteClick} />
                 )}
             </SectionCard>
 
             <IngredientDialog
                 open={dialogOpen}
+                title={editingIngredient ? "Edit Ingredient" : "Add Ingredient"}
                 onClose={handleClose}
-                onSubmit={handleSave}
-                initialValues={editingIngredient}
+                loading={loading}
+            >
+                <IngredientForm initialValues={editingIngredient} onSubmit={handleSave} />
+            </IngredientDialog>
+            <DeleteDialog
+                open={deleteOpen}
+                ingredient={selectedIngredient}
+                onClose={() => {
+                    setDeleteOpen(false);
+                    setSelectedIngredient(null);
+                }}
+                onConfirm={handleDelete}
             />
 
             <Snackbar
@@ -119,19 +253,21 @@ export default function Pantry() {
                 autoHideDuration={3000}
                 onClose={() => setSnackbarOpen(false)}
                 anchorOrigin={{
-                    vertical: "bottom",
+                    vertical: "top",
                     horizontal: "right",
                 }}
             >
                 <Alert
-                    severity="success"
-                    variant="filled"
                     onClose={() => setSnackbarOpen(false)}
-                    sx={{ width: "100%" }}
+                    severity={snackbarSeverity}
+                    variant="filled"
+                    sx={{
+                        width: "100%",
+                    }}
                 >
                     {snackbarMessage}
                 </Alert>
             </Snackbar>
-        </>
+        </Box>
     );
 }
