@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaPlus, FaBoxOpen } from "react-icons/fa";
 import { SearchBar } from "../../components/common";
 
 export default function PantryToolbar({ search, setSearch, onAdd }) {
@@ -30,29 +30,57 @@ export default function PantryToolbar({ search, setSearch, onAdd }) {
                             mb: 0.5,
                         }}
                     >
-                        🥗 My Pantry
-                    </Typography>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                mb: 3,
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 2,
+                                }}
+                            >
+                                <Box>
+                                    <FaBoxOpen size={40} color="#5A6A2A" />
+                                </Box>
 
-                    <Typography variant="body1" color="text.secondary">
-                        Keep track of your kitchen ingredients and stay organised.
+                                <Box>
+                                    <Typography variant="h3" fontWeight={700}>
+                                        My Pantry
+                                    </Typography>
+
+                                    <Typography>
+                                        Keep track of your kitchen ingredients and stay organised.
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        </Box>
                     </Typography>
                 </Box>
 
                 <Button
                     variant="contained"
                     size="large"
-                    startIcon={<FaPlusCircle />}
+                    startIcon={<FaPlus />}
                     onClick={onAdd}
                     sx={{
-                        px: 4,
-                        py: 1.3,
-                        borderRadius: 3,
+                        bgcolor: "#BBF1D2",
+                        color: "#2F6B45",
+                        px: 3,
+                        py: 1.2,
+                        borderRadius: 8,
                         textTransform: "none",
-                        fontWeight: 600,
-                        boxShadow: 3,
-                        backgroundColor: "#43A047",
+                        fontWeight: 700,
+                        boxShadow: "none",
+
                         "&:hover": {
-                            backgroundColor: "#388E3C",
+                            bgcolor: "#A6E9C4",
+                            boxShadow: "0 6px 18px rgba(0,0,0,.08)",
                         },
                     }}
                 >

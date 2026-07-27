@@ -36,10 +36,6 @@ const CATEGORIES = [
         icon: "🍖",
     },
     {
-        value: "Seafood",
-        icon: "🐟",
-    },
-    {
         value: "Grains",
         icon: "🌾",
     },

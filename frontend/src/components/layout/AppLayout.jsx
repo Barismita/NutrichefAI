@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import PageContainer from "./PageContainer";
-
+import DateTime from "./DateTime";
 const AppLayout = () => {
     return (
         <Box
@@ -27,6 +27,7 @@ const AppLayout = () => {
                 <Sidebar />
 
                 <PageContainer>
+                    <DateTime />
                     <Outlet />
                 </PageContainer>
             </Box>

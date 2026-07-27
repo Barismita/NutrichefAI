@@ -3,14 +3,31 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
     palette: {
         primary: {
-            main: "#4CAF50",
+            main: "#BBF1D2",
+            contrastText: "#2F6B45",
         },
+
         secondary: {
-            main: "#2E7D32",
+            main: "#EEF8CD",
+            contrastText: "#65762E",
         },
+
+        error: {
+            main: "#FF9D9D",
+        },
+
+        warning: {
+            main: "#FFC5AA",
+        },
+
         background: {
-            default: "#F5F7FA",
+            default: "#FCFFFB",
             paper: "#FFFFFF",
+        },
+
+        text: {
+            primary: "#2B2B2B",
+            secondary: "#6B7280",
         },
     },
 
@@ -31,7 +48,7 @@ const theme = createTheme({
     },
 
     shape: {
-        borderRadius: 12,
+        borderRadius: 18,
     },
 });
 

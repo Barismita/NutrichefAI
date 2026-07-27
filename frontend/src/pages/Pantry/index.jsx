@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Alert, Box, Snackbar, Paper, Typography, Button } from "@mui/material";
-
+import { FaPlusCircle } from "react-icons/fa";
 import { EmptyState, LoadingSpinner, PageHeader, SectionCard } from "../../components/common";
 
 import { getPantry, savePantry, deleteIngredient } from "../../api";
@@ -125,7 +125,6 @@ export default function Pantry() {
     return (
         <Box
             sx={{
-                background: "linear-gradient(180deg,#F6FBF4 0%,#FFFFFF 100%)",
                 minHeight: "100vh",
                 p: 4,
             }}
@@ -144,9 +143,11 @@ export default function Pantry() {
 
             <SectionCard
                 sx={{
-                    p: 4,
-                    borderRadius: 4,
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+                    p: 0,
+                    bgcolor: "transparent",
+                    borderRadius: 0,
+                    boxShadow: "none",
+                    border: "none",
                 }}
             >
                 <Box
@@ -205,7 +206,7 @@ export default function Pantry() {
                 {filteredPantry.length === 0 ? (
                     <Box
                         sx={{
-                            py: 8,
+                            py: 4,
                             textAlign: "center",
                         }}
                     >
@@ -220,13 +221,16 @@ export default function Pantry() {
                         <Typography color="text.secondary" sx={{ mt: 1 }}>
                             Add your first ingredient and start building your smart kitchen.
                         </Typography>
-
-                        <Button sx={{ mt: 4 }} variant="contained" onClick={handleAdd}>
-                            Add Ingredient
-                        </Button>
                     </Box>
                 ) : (
-                    <PantryTable ingredients={filteredPantry} onDelete={handleDeleteClick} />
+                    <Box
+                        sx={{
+                            maxWidth: 1280,
+                            mx: "auto",
+                        }}
+                    >
+                        <PantryTable ingredients={filteredPantry} onDelete={handleDeleteClick} />
+                    </Box>
                 )}
             </SectionCard>
 

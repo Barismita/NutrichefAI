@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { AppLayout } from "../components/layout";
 
@@ -17,12 +17,12 @@ export default function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                {/* Landing page without sidebar/navbar */}
-                <Route path="/" element={<Home />} />
-
                 {/* All application pages */}
                 <Route element={<AppLayout />}>
+                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
                     <Route path="/dashboard" element={<Dashboard />} />
+
                     <Route path="/pantry" element={<Pantry />} />
                     <Route path="/recipes" element={<Recipes />} />
                     <Route path="/profiles" element={<Profiles />} />
