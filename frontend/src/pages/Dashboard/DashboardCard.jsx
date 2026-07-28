@@ -7,9 +7,12 @@ export default function DashboardCard({ title, value, subtitle, icon, color, onC
             onClick={onClick}
             sx={{
                 cursor: onClick ? "pointer" : "default",
-                borderRadius: 3,
+                borderRadius: 2,
                 border: "1px solid #DDE3EA",
                 backgroundColor: "#FCFCFD",
+                mx: "auto",
+                maxWidth: 570,
+                width: "100%",
                 transition: ".25s",
                 "&:hover": onClick
                     ? {

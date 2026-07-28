@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
-import { RiBardFill } from "react-icons/ri";
+import { FaChartBar } from "react-icons/fa";
 
 import { getPantry } from "../../api";
 import { CATEGORY_THRESHOLDS, UNIT_THRESHOLDS } from "../../constants/pantryThresholds";
@@ -75,7 +75,9 @@ export default function Dashboard() {
         <Box>
             <Box
                 sx={{
-                    mb: 6,
+                    mb: 3,
+                    mt: 1,
+                    ml: 4,
                     display: "flex",
                     flexDirection: "column",
                 }}
@@ -88,10 +90,10 @@ export default function Dashboard() {
                         mb: 1,
                     }}
                 >
-                    <RiBardFill size={34} color="#f7f00c" />
+                    <FaChartBar size={50} />
 
                     <Typography
-                        variant="h2"
+                        variant="h3"
                         fontWeight={800}
                         sx={{
                             color: "#10471f",

@@ -6,11 +6,6 @@ const PageContainer = ({ children }) => {
             component="main"
             sx={{
                 flex: 1,
-                pt: 9,
-                px: 4,
-                pb: 4,
-                overflow: "auto",
-                bgcolor: "#FFFFFF",
             }}
         >
             {children}

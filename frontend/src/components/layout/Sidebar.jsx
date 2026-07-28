@@ -1,31 +1,96 @@
-import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
+import {
+    Drawer,
+    List,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    Toolbar,
+    Typography,
+    Box,
+} from "@mui/material";
 import { NavLink } from "react-router-dom";
 import {
     FaHome,
     FaBoxOpen,
     FaUtensils,
     FaBookOpen,
-    FaAppleAlt,
     FaRecycle,
     FaClock,
     FaRobot,
     FaUser,
 } from "react-icons/fa";
+
 const drawerWidth = 240;
 
-const navigation = [
-    { label: "Dashboard", path: "/dashboard", icon: <FaHome /> },
-    { label: "Pantry", path: "/pantry", icon: <FaBoxOpen /> },
-    { label: "Recipes", path: "/recipes", icon: <FaUtensils /> },
-    { label: "Cooking Guide", path: "/cooking-guide", icon: <FaBookOpen /> },
-    { label: "Nutrition", path: "/nutrition", icon: <FaAppleAlt /> },
-    { label: "Leftovers", path: "/leftovers", icon: <FaRecycle /> },
-    { label: "Expiry", path: "/expiry", icon: <FaClock /> },
-    { label: "Assistant", path: "/assistant", icon: <FaRobot /> },
-    { label: "Profiles", path: "/profiles", icon: <FaUser /> },
+const sections = [
+    {
+        title: "",
+        items: [
+            {
+                label: "Dashboard",
+                path: "/dashboard",
+                icon: <FaHome />,
+            },
+        ],
+    },
+    {
+        title: "PANTRY",
+        items: [
+            {
+                label: "Pantry",
+                path: "/pantry",
+                icon: <FaBoxOpen />,
+            },
+            {
+                label: "Expiry",
+                path: "/expiry",
+                icon: <FaClock />,
+            },
+        ],
+    },
+    {
+        title: "COOKING",
+        items: [
+            {
+                label: "Recipes",
+                path: "/recipes",
+                icon: <FaUtensils />,
+            },
+            {
+                label: "Cooking Guide",
+                path: "/cooking-guide",
+                icon: <FaBookOpen />,
+            },
+            {
+                label: "Leftovers",
+                path: "/leftovers",
+                icon: <FaRecycle />,
+            },
+        ],
+    },
+    {
+        title: "AI",
+        items: [
+            {
+                label: "Assistant",
+                path: "/assistant",
+                icon: <FaRobot />,
+            },
+        ],
+    },
+    {
+        title: "ACCOUNT",
+        items: [
+            {
+                label: "Profiles",
+                path: "/profiles",
+                icon: <FaUser />,
+            },
+        ],
+    },
 ];
 
-const Sidebar = () => {
+export default function Sidebar() {
     return (
         <Drawer
             variant="permanent"
@@ -34,49 +99,108 @@ const Sidebar = () => {
                 flexShrink: 0,
                 "& .MuiDrawer-paper": {
                     width: drawerWidth,
-                    boxSizing: "border-box",
-                    top: "64px",
+                    top: 64,
                     height: "calc(100vh - 64px)",
-                    borderRight: "1px solid #EEF1EC",
-                    backgroundColor: "#FFFFFF",
+                    borderRight: "1px solid #E5E7EB",
+                    background: "#FFFFFF",
+                    boxSizing: "border-box",
+                    overflowY: "auto",
                 },
             }}
         >
-            <Toolbar />
+            <Box
+                sx={{
+                    px: 1.5,
+                    pt: 0.5,
+                    pb: 2,
+                }}
+            >
+                {sections.map((section) => (
+                    <Box key={section.title} sx={{ mb: 2 }}>
+                        {section.title && (
+                            <Typography
+                                sx={{
+                                    px: 2,
+                                    mb: 1,
+                                    fontSize: 11,
+                                    fontWeight: 700,
+                                    letterSpacing: 1.2,
+                                    color: "#9CA3AF",
+                                }}
+                            >
+                                {section.title}
+                            </Typography>
+                        )}
 
-            <List>
-                {navigation.map((item) => (
-                    <ListItemButton
-                        key={item.path}
-                        component={NavLink}
-                        to={item.path}
-                        sx={{
-                            mx: 1,
-                            my: 0.5,
-                            borderRadius: 3,
-                            "&.active": {
-                                backgroundColor: "#EEF8CD",
-                                color: "#5A6A2A",
-                            },
-                            "&.active .MuiListItemIcon-root": {
-                                color: "#5A6A2A",
-                            },
-                        }}
-                    >
-                        <ListItemIcon
-                            sx={{
-                                minWidth: 30,
-                            }}
-                        >
-                            {item.icon}
-                        </ListItemIcon>
+                        <List disablePadding>
+                            {section.items.map((item) => (
+                                <ListItemButton
+                                    key={item.path}
+                                    component={NavLink}
+                                    to={item.path}
+                                    sx={{
+                                        py: 1.3,
+                                        px: 2,
+                                        mb: 0.8,
+                                        borderRadius: 3,
+                                        color: "#374151",
+                                        transition: "all .25s",
 
-                        <ListItemText primary={item.label} />
-                    </ListItemButton>
+                                        "& .MuiListItemIcon-root": {
+                                            minWidth: 38,
+                                            color: "#6B7280",
+                                            transition: "all .25s",
+                                        },
+
+                                        "&.active": {
+                                            bgcolor: "#EEF8CD",
+                                            color: "#355E3B",
+                                            fontWeight: 700,
+                                            borderLeft: "5px solid #5FAE63",
+                                        },
+
+                                        "&.active .MuiListItemIcon-root": {
+                                            color: "#355E3B",
+                                        },
+
+                                        "&:hover": {
+                                            bgcolor: "#F6FAEE",
+                                            transform: "translateX(4px)",
+                                        },
+                                    }}
+                                >
+                                    <ListItemIcon>{item.icon}</ListItemIcon>
+
+                                    <ListItemText
+                                        primary={item.label}
+                                        primaryTypographyProps={{
+                                            fontWeight: 600,
+                                            fontSize: 15,
+                                        }}
+                                    />
+                                </ListItemButton>
+                            ))}
+                        </List>
+                    </Box>
                 ))}
-            </List>
+
+                <Box
+                    sx={{
+                        mt: 4,
+                        pt: 2,
+                        borderTop: "1px solid #E5E7EB",
+                        textAlign: "center",
+                    }}
+                >
+                    <Typography fontWeight={700} fontSize={15} color="#355E3B">
+                        NutriChef AI
+                    </Typography>
+
+                    <Typography variant="caption" color="text.secondary">
+                        Version 1.0.0
+                    </Typography>
+                </Box>
+            </Box>
         </Drawer>
     );
-};
-
-export default Sidebar;
+}
