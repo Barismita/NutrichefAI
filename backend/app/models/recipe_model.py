@@ -21,6 +21,7 @@ class Recipe(Document):
     cooking_time_minutes: int = Field(..., gt=0)
     servings: int = Field(..., gt=0)
     cuisine: str
+    favorite: bool = False
     dietary_tags: list[str] = Field(default_factory=list)
     nutrition: Nutrition
     image_url: Optional[str] = None

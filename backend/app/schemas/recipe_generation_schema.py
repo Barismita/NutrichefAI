@@ -5,11 +5,10 @@ from pydantic import BaseModel, Field
 
 class RecipeGenerationRequest(BaseModel):
     ingredients: List[str] = Field(..., min_items=1)
-    cuisine: Optional[str] = None
     diet: Optional[str] = None
     max_cooking_time: Optional[int] = Field(None, gt=0)
     servings: Optional[int] = Field(None, gt=0)
-    additional_instructions: Optional[str] = None
+    use_pantry: bool = False
 
 
 class NutritionSchema(BaseModel):

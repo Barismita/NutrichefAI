@@ -1,31 +1,62 @@
 import {
-    Paper,
-    Typography,
+    Alert,
     Box,
-    Chip,
-    Grid,
-    Divider,
     Button,
+    Chip,
+    Divider,
+    Grid,
     List,
     ListItem,
     ListItemIcon,
     ListItemText,
+    Paper,
+    Snackbar,
+    Typography,
 } from "@mui/material";
 
 import {
-    FaUtensils,
-    FaClock,
-    FaUsers,
     FaCheckCircle,
-    FaMagic,
+    FaClock,
     FaHeart,
+    FaMagic,
     FaRedo,
+    FaUsers,
+    FaUtensils,
 } from "react-icons/fa";
 import NutritionCard from "../../components/recipes/NutritionCard";
 import RecipeIngredient from "../../components/recipes/RecipeIngredient";
 import StepCard from "../../components/recipes/StepCard";
+import { saveRecipe } from "../../api/index";
+import { useState } from "react";
 
-export default function RecipeDetails({ recipe, onGenerateAgain }) {
+export default function RecipeDetails({ recipe, onGenerateAgain, onSave }) {
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        severity: "success",
+        message: "",
+    });
+    const handleSave = async () => {
+        try {
+            await saveRecipe(recipe);
+
+            if (onSave) {
+                onSave(recipe);
+            }
+
+            setSnackbar({
+                open: true,
+                severity: "success",
+                message: "Recipe saved successfully!",
+            });
+        } catch (err) {
+            console.error(err);
+            setSnackbar({
+                open: true,
+                severity: "error",
+                message: "Unable to save recipe.",
+            });
+        }
+    };
     if (!recipe) return null;
 
     return (
@@ -40,14 +71,21 @@ export default function RecipeDetails({ recipe, onGenerateAgain }) {
         >
             {/* Header */}
 
-            <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
+            <Box
+                mb={4}
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                }}
+            >
                 <Box>
                     <Typography variant="h4" fontWeight={700}>
                         {recipe.name || recipe.title}
                     </Typography>
 
                     <Typography color="text.secondary" mt={1}>
-                        AI Generated Recipe
+                        {recipe.description}
                     </Typography>
                 </Box>
 
@@ -61,7 +99,7 @@ export default function RecipeDetails({ recipe, onGenerateAgain }) {
                     <NutritionCard
                         icon={<FaClock />}
                         title="Cooking Time"
-                        value={`${recipe.cooking_time || "-"} mins`}
+                        value={`${recipe.cooking_time_minutes ?? "-"} mins`}
                     />
                 </Grid>
 
@@ -114,7 +152,7 @@ export default function RecipeDetails({ recipe, onGenerateAgain }) {
                 Cooking Steps
             </Typography>
 
-            {(recipe.steps || []).map((step, index) => (
+            {(recipe.instructions || []).map((step, index) => (
                 <StepCard key={index} step={step} index={index} />
             ))}
 
@@ -164,7 +202,14 @@ export default function RecipeDetails({ recipe, onGenerateAgain }) {
 
             {/* Footer */}
 
-            <Box display="flex" justifyContent="flex-end" gap={2} mt={5}>
+            <Box
+                gap={2}
+                mt={5}
+                sx={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                }}
+            >
                 <Button
                     variant="outlined"
                     startIcon={<FaRedo />}
@@ -178,20 +223,28 @@ export default function RecipeDetails({ recipe, onGenerateAgain }) {
                 </Button>
 
                 <Button
-                    variant="contained"
                     startIcon={<FaHeart />}
-                    sx={{
-                        textTransform: "none",
-                        borderRadius: 3,
-                        bgcolor: "#2E7D32",
-                        "&:hover": {
-                            bgcolor: "#256628",
-                        },
-                    }}
+                    variant="outlined"
+                    color="success"
+                    onClick={handleSave}
                 >
                     Save Recipe
                 </Button>
             </Box>
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={3000}
+                onClose={() =>
+                    setSnackbar({
+                        ...snackbar,
+                        open: false,
+                    })
+                }
+            >
+                <Alert severity={snackbar.severity} variant="filled">
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </Paper>
     );
 }

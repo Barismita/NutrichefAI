@@ -34,3 +34,18 @@ export const suggestSubstitutions = async (payload) => {
     const response = await apiClient.post("/recipes/substitute", payload);
     return response.data;
 };
+
+export const saveRecipe = async (recipe) => {
+    const response = await apiClient.post("/saved-recipes/", recipe);
+    return response.data;
+};
+
+export const getSavedRecipes = async () => {
+    const response = await apiClient.get("/saved-recipes/");
+    return response.data;
+};
+
+export const deleteSavedRecipe = async (id) => {
+    const response = await apiClient.delete(`/saved-recipes/${id}`);
+    return response.data;
+};

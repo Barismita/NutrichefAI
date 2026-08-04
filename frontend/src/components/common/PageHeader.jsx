@@ -2,7 +2,14 @@ import { Box, Typography } from "@mui/material";
 
 const PageHeader = ({ title, subtitle, action }) => {
     return (
-        <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+        <Box
+            mb={3}
+            sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+            }}
+        >
             <Box>
                 <Typography variant="h4" fontWeight={700}>
                     {title}

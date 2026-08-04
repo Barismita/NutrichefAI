@@ -1,26 +1,21 @@
 import { useState } from "react";
 import {
-    Paper,
-    Typography,
-    Grid,
-    TextField,
-    MenuItem,
-    Button,
-    CircularProgress,
     Box,
+    Button,
     Checkbox,
+    CircularProgress,
     FormControlLabel,
-    InputAdornment,
+    MenuItem,
+    TextField,
 } from "@mui/material";
-
-import { FaMagic } from "react-icons/fa";
-import { GiCook } from "react-icons/gi";
 import { generateRecipe } from "../../api";
+import { FaMagic } from "react-icons/fa";
 
 export default function RecipeGenerator({ onRecipeGenerated }) {
     const [ingredients, setIngredients] = useState("");
     const [diet, setDiet] = useState("");
-    const [goal, setGoal] = useState("");
+    const [maxCookingTime, setMaxCookingTime] = useState(30);
+    const [servings, setServings] = useState(2);
     const [loading, setLoading] = useState(false);
     const [usePantry, setUsePantry] = useState(true);
 
@@ -34,8 +29,8 @@ export default function RecipeGenerator({ onRecipeGenerated }) {
                     .map((item) => item.trim())
                     .filter(Boolean),
                 diet,
-
-                health_goal: goal,
+                max_cooking_time: maxCookingTime === "" ? null : Number(maxCookingTime),
+                servings: Number(servings),
                 use_pantry: usePantry,
             };
 
@@ -67,144 +62,125 @@ export default function RecipeGenerator({ onRecipeGenerated }) {
     };
 
     return (
-        <Box
-            sx={{
-                py: 2,
-            }}
-        >
-            {/* Header */}
-
+        <Box sx={{ mt: 2 }}>
             <Box
                 sx={{
-                    display: "flex",
-                    alignItems: "center",
+                    display: "grid",
+                    gridTemplateColumns: {
+                        xs: "1fr",
+                        lg: "2fr 1fr 1fr 1fr auto",
+                    },
                     gap: 2,
-                    mb: 3,
-                }}
-            >
-                <GiCook size={65} color="#2E7D32" style={{ flexShrink: 0 }} />
-
-                <Box>
-                    <Typography
-                        variant="h2"
-                        sx={{
-                            fontWeight: 600,
-                            color: "#1F2937",
-                            lineHeight: 1.05,
-                            mb: 0.5,
-                        }}
-                    >
-                        Create Your Perfect Recipe
-                    </Typography>
-
-                    <Typography
-                        sx={{
-                            fontWeight: 400,
-                            fontSize: "1.6rem",
-                        }}
-                    >
-                        Powered by AI • Personalized • Pantry Aware
-                    </Typography>
-                </Box>
-            </Box>
-
-            <Box
-                sx={{
-                    display: "flex",
-                    gap: 3,
-                    flexWrap: "wrap",
-                }}
-            >
-                <Box sx={{ flex: 1, minWidth: 260 }}>
-                    <TextField
-                        fullWidth
-                        label="Ingredients"
-                        placeholder="Milk, Rice, Chicken..."
-                        value={ingredients}
-                        onChange={(e) => setIngredients(e.target.value)}
-                        sx={inputStyle}
-                    />
-                </Box>
-
-                <Box sx={{ flex: 1, minWidth: 260 }}>
-                    <TextField
-                        select
-                        fullWidth
-                        label="Diet"
-                        value={diet}
-                        onChange={(e) => setDiet(e.target.value)}
-                        sx={inputStyle}
-                    >
-                        <MenuItem value="">Any</MenuItem>
-                        <MenuItem value="vegetarian">Vegetarian</MenuItem>
-                        <MenuItem value="non-vegetarian">Non-Vegetarian</MenuItem>
-                        <MenuItem value="high-protein">High Protein</MenuItem>
-                        <MenuItem value="quick">Quick Meal</MenuItem>
-                    </TextField>
-                </Box>
-
-                <Box sx={{ flex: 1, minWidth: 260 }}>
-                    <TextField
-                        fullWidth
-                        label="Health Goal"
-                        placeholder="Weight Loss, Muscle Gain..."
-                        value={goal}
-                        onChange={(e) => setGoal(e.target.value)}
-                        sx={inputStyle}
-                    />
-                </Box>
-            </Box>
-            <Box
-                mt={4}
-                sx={{
-                    display: "flex",
                     alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 3,
                 }}
             >
+                <TextField
+                    fullWidth
+                    label="Ingredients"
+                    placeholder="Milk, Rice, Chicken..."
+                    value={ingredients}
+                    disabled={loading}
+                    onChange={(e) => setIngredients(e.target.value)}
+                    sx={inputStyle}
+                />
+
+                <TextField
+                    select
+                    fullWidth
+                    label="Diet"
+                    value={diet}
+                    disabled={loading}
+                    onChange={(e) => setDiet(e.target.value)}
+                    sx={inputStyle}
+                >
+                    <MenuItem value="">Any</MenuItem>
+                    <MenuItem value="vegetarian">Vegetarian</MenuItem>
+                    <MenuItem value="vegan">Vegan</MenuItem>
+                    <MenuItem value="high-protein">High Protein</MenuItem>
+                    <MenuItem value="low-carb">Low Carb</MenuItem>
+                    <MenuItem value="keto">Keto</MenuItem>
+                    <MenuItem value="gluten-free">Gluten Free</MenuItem>
+                    <MenuItem value="dairy-free">Dairy Free</MenuItem>
+                </TextField>
+
+                <TextField
+                    select
+                    fullWidth
+                    label="Cooking Time"
+                    value={maxCookingTime}
+                    disabled={loading}
+                    onChange={(e) => setMaxCookingTime(e.target.value)}
+                    sx={inputStyle}
+                >
+                    <MenuItem value={15}>15 min</MenuItem>
+                    <MenuItem value={30}>30 min</MenuItem>
+                    <MenuItem value={45}>45 min</MenuItem>
+                    <MenuItem value={60}>60 min</MenuItem>
+                    <MenuItem value="">No Limit</MenuItem>
+                </TextField>
+
+                <TextField
+                    select
+                    fullWidth
+                    label="Servings"
+                    value={servings}
+                    disabled={loading}
+                    onChange={(e) => setServings(e.target.value)}
+                    sx={inputStyle}
+                >
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem value={6}>6</MenuItem>
+                </TextField>
+
+                <Button
+                    variant="contained"
+                    onClick={handleGenerate}
+                    disabled={loading}
+                    startIcon={
+                        loading ? <CircularProgress size={20} color="inherit" /> : <FaMagic />
+                    }
+                    sx={{
+                        height: 64,
+                        minWidth: 240,
+                        borderRadius: "999px",
+                        textTransform: "none",
+                        fontSize: 20,
+                        fontWeight: 700,
+                        background: "linear-gradient(135deg,#22C55E,#16A34A)",
+                        color: "#fff",
+                        boxShadow: "0 12px 30px rgba(34,197,94,.25)",
+                        whiteSpace: "nowrap",
+
+                        "&:hover": {
+                            background: "linear-gradient(135deg,#16A34A,#15803D)",
+                        },
+
+                        "&:disabled": {
+                            background: "#D1D5DB",
+                            color: "#6B7280",
+                        },
+                    }}
+                >
+                    {loading ? "Generating..." : "Generate Recipe"}
+                </Button>
+            </Box>
+
+            <Box mt={2}>
                 <FormControlLabel
                     control={
                         <Checkbox
                             checked={usePantry}
+                            disabled={loading}
                             onChange={(e) => setUsePantry(e.target.checked)}
                             color="success"
                         />
                     }
                     label="Use only ingredients available in my pantry"
-                    sx={{ m: 0 }}
                 />
-                <Box
-                    sx={{
-                        mt: 2.5, // adds space above the button
-                        display: "flex",
-                        justifyContent: "flex-end",
-                    }}
-                >
-                    <Button
-                        variant="contained"
-                        onClick={handleGenerate}
-                        disabled={loading}
-                        startIcon={
-                            loading ? <CircularProgress size={18} color="inherit" /> : <FaMagic />
-                        }
-                        sx={{
-                            minWidth: 260,
-                            height: 64,
-                            borderRadius: 999,
-                            textTransform: "none",
-                            fontWeight: 700,
-                            fontSize: 17,
-                            boxShadow: "0 10px 24px rgba(22,163,74,.28)",
-
-                            "&:hover": {
-                                background: "linear-gradient(90deg,#16A34A 0%,#15803D 100%)",
-                            },
-                        }}
-                    >
-                        {loading ? "Generating..." : "Generate Recipe"}
-                    </Button>
-                </Box>
             </Box>
         </Box>
     );

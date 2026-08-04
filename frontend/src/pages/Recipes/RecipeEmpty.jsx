@@ -5,7 +5,7 @@ export default function RecipeEmpty() {
     return (
         <Box
             sx={{
-                py: 8,
+                py: 4,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -14,15 +14,15 @@ export default function RecipeEmpty() {
             <Box
                 sx={{
                     textAlign: "center",
-                    maxWidth: 520,
+                    maxWidth: 600,
                 }}
             >
                 {/* Illustration */}
 
                 <Box
                     sx={{
-                        width: 130,
-                        height: 130,
+                        width: 110,
+                        height: 110,
                         mx: "auto",
                         mb: 3,
                         borderRadius: "50%",

@@ -2,19 +2,19 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 import {
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    Typography,
-    IconButton,
-    Chip,
     Box,
+    Chip,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    IconButton,
     Paper,
+    Typography,
 } from "@mui/material";
 
 import { FaTimes } from "react-icons/fa";
-import { FaGlassWater, FaCarrot, FaAppleWhole, FaWheatAwn, FaBottleWater } from "react-icons/fa6";
-import { GiSaltShaker, GiMeat, GiCardboardBox } from "react-icons/gi";
+import { FaAppleWhole, FaBottleWater, FaCarrot, FaGlassWater, FaWheatAwn } from "react-icons/fa6";
+import { GiCardboardBox, GiMeat, GiSaltShaker } from "react-icons/gi";
 
 dayjs.extend(relativeTime);
 
@@ -132,9 +132,11 @@ export default function DashboardItemDialog({ open, title, items, onClose }) {
                                 }}
                             >
                                 <Box
-                                    display="flex"
-                                    justifyContent="space-between"
-                                    alignItems="flex-start"
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        alignItems: "flex-start",
+                                    }}
                                 >
                                     <Box display="flex" gap={2}>
                                         <Box

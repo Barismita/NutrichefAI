@@ -1,7 +1,7 @@
 import json
-from typing import Any, Dict
+import traceback
 
-from fastapi import HTTPException, status
+from fastapi import HTTPException
 
 from app.schemas.recipe_generation_schema import (
     RecipeGenerationRequest,
@@ -11,34 +11,33 @@ from app.services.ai_provider import AIProvider
 from app.utils.recipe_prompt_builder import build_recipe_generation_prompt
 
 
-# Placeholder for AI provider call; replace with actual provider logic
 async def generate_recipe(request: RecipeGenerationRequest) -> RecipeGenerationResponse:
     if not request.ingredients or not all(i.strip() for i in request.ingredients):
         raise HTTPException(status_code=400, detail="Ingredients list cannot be empty.")
 
     prompt = build_recipe_generation_prompt(
         ingredients=request.ingredients,
-        cuisine=request.cuisine,
         diet=request.diet,
         max_cooking_time=request.max_cooking_time,
         servings=request.servings,
-        additional_instructions=request.additional_instructions,
+        use_pantry=request.use_pantry,
     )
     provider = AIProvider()
 
     try:
         ai_response = await provider.generate(prompt)
     except Exception as e:
-        raise HTTPException(status_code=502, detail=f"AI provider error: {str(e)}")
-
+        traceback.print_exc()
+        raise
     try:
-        recipe_data = json.loads(ai_response)
-    except Exception:
-        raise HTTPException(
-            status_code=502, detail="Malformed AI response (not valid JSON)."
-        )
+        clean_response = ai_response.replace("```json", "").replace("```", "").strip()
 
-    # Validate required fields
+        recipe_data = json.loads(clean_response)
+    except Exception as e:
+        traceback.print_exc()
+
+        raise HTTPException(status_code=502, detail=f"{type(e).__name__}: {e}")
+
     required_fields = [
         "title",
         "ingredients",

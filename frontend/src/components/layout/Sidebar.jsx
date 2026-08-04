@@ -1,23 +1,22 @@
 import {
+    Box,
     Drawer,
     List,
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    Toolbar,
     Typography,
-    Box,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import {
-    FaHome,
-    FaBoxOpen,
-    FaUtensils,
     FaBookOpen,
-    FaRecycle,
+    FaBoxOpen,
     FaClock,
+    FaHome,
+    FaRecycle,
     FaRobot,
     FaUser,
+    FaUtensils,
 } from "react-icons/fa";
 
 const drawerWidth = 240;
@@ -172,11 +171,16 @@ export default function Sidebar() {
                                     <ListItemIcon>{item.icon}</ListItemIcon>
 
                                     <ListItemText
-                                        primary={item.label}
-                                        primaryTypographyProps={{
-                                            fontWeight: 600,
-                                            fontSize: 15,
-                                        }}
+                                        primary={
+                                            <Typography
+                                                sx={{
+                                                    fontWeight: 600,
+                                                    fontSize: 15,
+                                                }}
+                                            >
+                                                {item.label}
+                                            </Typography>
+                                        }
                                     />
                                 </ListItemButton>
                             ))}
