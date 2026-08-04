@@ -8,6 +8,7 @@ from app.services.pantry_service import (
     add_ingredient,
     delete_ingredient,
     get_pantry,
+    update_ingredient
 )
 
 router = APIRouter(
@@ -39,6 +40,23 @@ async def add_ingredient_route(request: Ingredient):
     pantry = await add_ingredient(request)
     return PantryResponse(ingredients=pantry.ingredients)
 
+@router.put(
+    "/{ingredient_name}",
+    response_model=PantryResponse,
+    summary="Update ingredient",
+)
+async def update_ingredient_route(
+    ingredient_name: str,
+    request: Ingredient,
+):
+    pantry = await update_ingredient(
+        ingredient_name,
+        request,
+    )
+
+    return PantryResponse(
+        ingredients=pantry.ingredients,
+    )
 
 @router.delete(
     "/{ingredient_name}",

@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { Alert, Box, Snackbar, Paper, Typography, Button } from "@mui/material";
-import { FaPlusCircle } from "react-icons/fa";
-import { EmptyState, LoadingSpinner, PageHeader, SectionCard } from "../../components/common";
+import { Alert, Box, Paper, Snackbar, Typography } from "@mui/material";
+import { LoadingSpinner, SectionCard } from "../../components/common";
 
-import { getPantry, savePantry, deleteIngredient } from "../../api";
+import { deleteIngredient, getPantry, savePantry, updateIngredient } from "../../api";
 
 import IngredientDialog from "./IngredientDialog";
 import PantryTable from "./PantryTable";
@@ -70,14 +69,22 @@ export default function Pantry() {
 
     const handleSave = async (ingredient) => {
         try {
-            await savePantry(ingredient);
+            if (editingIngredient) {
+                await updateIngredient(editingIngredient.name, ingredient);
+            } else {
+                await savePantry(ingredient);
+            }
 
             await loadPantry();
 
             handleClose();
 
             setSnackbarSeverity("success");
-            setSnackbarMessage(`${ingredient.name} added successfully.`);
+            setSnackbarMessage(
+                editingIngredient
+                    ? `${ingredient.name} updated successfully.`
+                    : `${ingredient.name} added successfully.`
+            );
             setSnackbarOpen(true);
         } catch (error) {
             console.error(error);
@@ -116,6 +123,10 @@ export default function Pantry() {
 
             setSnackbarOpen(true);
         }
+    };
+    const handleEdit = (ingredient) => {
+        setEditingIngredient(ingredient);
+        setDialogOpen(true);
     };
 
     if (loading) {
@@ -229,7 +240,11 @@ export default function Pantry() {
                             mx: "auto",
                         }}
                     >
-                        <PantryTable ingredients={filteredPantry} onDelete={handleDeleteClick} />
+                        <PantryTable
+                            ingredients={filteredPantry}
+                            onEdit={handleEdit}
+                            onDelete={handleDeleteClick}
+                        />
                     </Box>
                 )}
             </SectionCard>

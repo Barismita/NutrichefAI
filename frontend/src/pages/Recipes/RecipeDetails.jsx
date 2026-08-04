@@ -3,8 +3,10 @@ import {
     Box,
     Button,
     Chip,
+    Collapse,
     Divider,
     Grid,
+    LinearProgress,
     List,
     ListItem,
     ListItemIcon,
@@ -35,6 +37,8 @@ export default function RecipeDetails({ recipe, onGenerateAgain, onSave }) {
         severity: "success",
         message: "",
     });
+    const [currentStep, setCurrentStep] = useState(0);
+    const [showAllSteps, setShowAllSteps] = useState(false);
     const handleSave = async () => {
         try {
             await saveRecipe(recipe);
@@ -57,6 +61,9 @@ export default function RecipeDetails({ recipe, onGenerateAgain, onSave }) {
             });
         }
     };
+    const totalSteps = recipe.instructions?.length || 0;
+
+    const progress = totalSteps === 0 ? 0 : ((currentStep + 1) / totalSteps) * 100;
     if (!recipe) return null;
 
     return (
@@ -148,13 +155,76 @@ export default function RecipeDetails({ recipe, onGenerateAgain, onSave }) {
 
             {/* Steps */}
 
-            <Typography variant="h5" fontWeight={700} mb={2}>
-                Cooking Steps
+            <Typography variant="h5" fontWeight={700}>
+                Step-by-Step Cooking
             </Typography>
 
-            {(recipe.instructions || []).map((step, index) => (
-                <StepCard key={index} step={step} index={index} />
-            ))}
+            <Box mt={2} mb={3}>
+                <Typography fontWeight={600}>
+                    Step {currentStep + 1} of {totalSteps}
+                </Typography>
+
+                <LinearProgress
+                    variant="determinate"
+                    value={progress}
+                    sx={{
+                        mt: 1,
+                        height: 10,
+                        borderRadius: 5,
+                    }}
+                />
+
+                <Typography variant="body2" color="text.secondary" mt={1}>
+                    {Math.round(progress)}% Complete
+                </Typography>
+            </Box>
+
+            <StepCard step={recipe.instructions[currentStep]} index={currentStep} />
+
+            <Box
+                mt={3}
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                }}
+            >
+                <Button
+                    variant="outlined"
+                    disabled={currentStep === 0}
+                    onClick={() => setCurrentStep((prev) => prev - 1)}
+                >
+                    Previous
+                </Button>
+
+                <Button
+                    variant="contained"
+                    color="success"
+                    disabled={currentStep === totalSteps - 1}
+                    onClick={() => setCurrentStep((prev) => prev + 1)}
+                >
+                    Next
+                </Button>
+            </Box>
+
+            <Box mt={3}>
+                <Button onClick={() => setShowAllSteps(!showAllSteps)}>
+                    {showAllSteps ? "Hide All Steps" : "View All Steps"}
+                </Button>
+
+                <Collapse in={showAllSteps}>
+                    <Box mt={2}>
+                        {recipe.instructions.map((step, index) => (
+                            <StepCard
+                                key={index}
+                                step={step}
+                                index={index}
+                                active={index === currentStep}
+                                completed={index < currentStep}
+                            />
+                        ))}
+                    </Box>
+                </Collapse>
+            </Box>
 
             {/* Nutrition */}
 

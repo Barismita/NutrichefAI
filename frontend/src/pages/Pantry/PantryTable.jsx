@@ -1,6 +1,5 @@
-import { FaTrashAlt } from "react-icons/fa";
 import dayjs from "dayjs";
-
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import {
     Box,
     Chip,
@@ -41,7 +40,7 @@ const categoryColor = (category) => {
     }
 };
 
-export default function PantryTable({ ingredients, onDelete }) {
+export default function PantryTable({ ingredients, onDelete, onEdit }) {
     return (
         <TableContainer
             component={Paper}
@@ -240,16 +239,23 @@ export default function PantryTable({ ingredients, onDelete }) {
                             </TableCell>
 
                             <TableCell align="center">
-                                <Tooltip title="Delete ingredient">
-                                    <IconButton
-                                        color="error"
-                                        size="small"
-                                        sx={{ p: 0.8 }}
-                                        onClick={() => onDelete(ingredient)}
-                                    >
-                                        <FaTrashAlt />
-                                    </IconButton>
-                                </Tooltip>
+                                <Box display="flex" justifyContent="center" gap={1}>
+                                    <Tooltip title="Edit Ingredient">
+                                        <IconButton size="small" onClick={() => onEdit(ingredient)}>
+                                            <FaEdit />
+                                        </IconButton>
+                                    </Tooltip>
+
+                                    <Tooltip title="Delete Ingredient">
+                                        <IconButton
+                                            color="error"
+                                            size="small"
+                                            onClick={() => onDelete(ingredient)}
+                                        >
+                                            <FaTrashAlt />
+                                        </IconButton>
+                                    </Tooltip>
+                                </Box>
                             </TableCell>
                         </TableRow>
                     ))}

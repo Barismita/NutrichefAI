@@ -66,3 +66,26 @@ async def delete_ingredient(name: str) -> Pantry:
     await pantry.save()
 
     return pantry
+
+async def update_ingredient(
+    ingredient_name: str,
+    ingredient: Ingredient,
+) -> Pantry:
+    pantry = await Pantry.find_one(Pantry.user_id == USER_ID)
+
+    if not pantry:
+        raise HTTPException(
+            status_code=404,
+            detail="Pantry not found",
+        )
+
+    for index, item in enumerate(pantry.ingredients):
+        if item.name.lower() == ingredient_name.lower():
+            pantry.ingredients[index] = ingredient
+            await pantry.save()
+            return pantry
+
+    raise HTTPException(
+        status_code=404,
+        detail="Ingredient not found",
+    )

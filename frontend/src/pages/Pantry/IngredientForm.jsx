@@ -1,20 +1,20 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import dayjs from "dayjs";
 
 import {
     Box,
     Grid,
+    InputAdornment,
     MenuItem,
     Paper,
     Stack,
     TextField,
     Typography,
-    InputAdornment,
 } from "@mui/material";
 
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import { FaCarrot, FaBalanceScale, FaLayerGroup, FaStickyNote } from "react-icons/fa";
+import { FaBalanceScale, FaCarrot, FaLayerGroup, FaStickyNote } from "react-icons/fa";
 
 const UNITS = ["pcs", "g", "kg", "ml", "L", "tbsp", "tsp", "cup"];
 
@@ -73,6 +73,10 @@ export default function IngredientForm({ initialValues, onSubmit }) {
     );
 
     const [formData, setFormData] = useState(initialForm);
+
+    useEffect(() => {
+        setFormData(initialForm);
+    }, [initialForm]);
 
     const [calendarOpen, setCalendarOpen] = useState(false);
 

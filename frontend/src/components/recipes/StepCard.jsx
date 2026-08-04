@@ -1,6 +1,6 @@
 import { Box, Chip, Paper, Typography } from "@mui/material";
 
-export default function StepCard({ step, index }) {
+export default function StepCard({ step, index, active = false, completed = false }) {
     const instruction = typeof step === "string" ? step : step.instruction || step.description;
 
     const duration = typeof step === "object" ? step.duration : null;
@@ -12,7 +12,9 @@ export default function StepCard({ step, index }) {
                 p: 3,
                 mb: 2,
                 borderRadius: 3,
-                border: "1px solid #E5E7EB",
+                border: active ? "2px solid #2E7D32" : "1px solid #E5E7EB",
+                bgcolor: completed ? "#F1F8E9" : active ? "#F9FFF8" : "white",
+                transition: ".2s",
             }}
         >
             <Box
@@ -23,8 +25,10 @@ export default function StepCard({ step, index }) {
                     alignItems: "center",
                 }}
             >
-                <Chip label={`STEP ${index + 1}`} color="success" />
-
+                <Chip
+                    label={completed ? `✓ STEP ${index + 1}` : `STEP ${index + 1}`}
+                    color={active || completed ? "success" : "default"}
+                />
                 {duration && <Chip label={`${duration} mins`} variant="outlined" />}
             </Box>
 

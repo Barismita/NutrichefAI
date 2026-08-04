@@ -14,3 +14,8 @@ export const deleteIngredient = async (ingredient) => {
     const { data } = await apiClient.delete(`/pantry/${ingredient}`);
     return data;
 };
+
+export const updateIngredient = async (ingredientName, ingredient) => {
+    const { data } = await apiClient.put(`/pantry/${ingredientName}`, ingredient);
+    return data;
+};

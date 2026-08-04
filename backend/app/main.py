@@ -3,8 +3,6 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.assistant_api import router as assistant_router
-from app.api.cooking_guide_api import router as cooking_guide_router
 from app.api.expiry_api import router as expiry_router
 from app.api.leftover_api import router as leftover_router
 from app.api.nutrition_api import router as nutrition_router
@@ -38,8 +36,6 @@ app.include_router(saved_recipe_router)
 app.include_router(pantry_router)
 
 # AI
-app.include_router(assistant_router)
-app.include_router(cooking_guide_router)
 app.include_router(nutrition_router)
 app.include_router(leftover_router)
 app.include_router(expiry_router)
