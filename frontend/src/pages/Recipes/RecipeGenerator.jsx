@@ -1,15 +1,8 @@
-import { useState } from "react";
-import {
-    Box,
-    Button,
-    Checkbox,
-    CircularProgress,
-    FormControlLabel,
-    MenuItem,
-    TextField,
-} from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, Button, CircularProgress, MenuItem, TextField } from "@mui/material";
 import { generateRecipe } from "../../api";
 import { FaMagic } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 export default function RecipeGenerator({ onRecipeGenerated }) {
     const [ingredients, setIngredients] = useState("");
@@ -18,16 +11,25 @@ export default function RecipeGenerator({ onRecipeGenerated }) {
     const [servings, setServings] = useState(2);
     const [loading, setLoading] = useState(false);
     const [usePantry, setUsePantry] = useState(true);
+    const location = useLocation();
 
+    useEffect(() => {
+        if (location.state?.ingredients) {
+            setIngredients(location.state.ingredients.join(", "));
+            setUsePantry(true);
+        }
+    }, [location.state]);
     const handleGenerate = async () => {
         try {
             setLoading(true);
 
             const payload = {
-                ingredients: ingredients
-                    .split(",")
-                    .map((item) => item.trim())
-                    .filter(Boolean),
+                ingredients:
+                    location.state?.ingredients ??
+                    ingredients
+                        .split(",")
+                        .map((item) => item.trim())
+                        .filter(Boolean),
                 diet,
                 max_cooking_time: maxCookingTime === "" ? null : Number(maxCookingTime),
                 servings: Number(servings),
@@ -42,7 +44,11 @@ export default function RecipeGenerator({ onRecipeGenerated }) {
             setLoading(false);
         }
     };
-
+    useEffect(() => {
+        if (location.state?.ingredients && location.state.ingredients.length > 0) {
+            handleGenerate();
+        }
+    }, []);
     const inputStyle = {
         "& .MuiOutlinedInput-root": {
             height: 64,
@@ -167,20 +173,6 @@ export default function RecipeGenerator({ onRecipeGenerated }) {
                 >
                     {loading ? "Generating..." : "Generate Recipe"}
                 </Button>
-            </Box>
-
-            <Box mt={2}>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={usePantry}
-                            disabled={loading}
-                            onChange={(e) => setUsePantry(e.target.checked)}
-                            color="success"
-                        />
-                    }
-                    label="Use only ingredients available in my pantry"
-                />
             </Box>
         </Box>
     );

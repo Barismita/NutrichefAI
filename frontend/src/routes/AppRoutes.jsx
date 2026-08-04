@@ -1,8 +1,6 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { AppLayout } from "../components/layout";
-
-import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import Pantry from "../pages/Pantry";
 import Recipes from "../pages/Recipes";
@@ -28,7 +26,7 @@ export default function AppRoutes() {
                     <Route path="/profiles" element={<Profiles />} />
                     <Route path="/nutrition" element={<Nutrition />} />
                     <Route path="/cooking-guide" element={<CookingGuide />} />
-                    <Route path="/leftover" element={<Leftover />} />
+                    <Route path="/leftovers" element={<Leftover />} />
                     <Route path="/expiry" element={<Expiry />} />
                     <Route path="/assistant" element={<Assistant />} />
                 </Route>

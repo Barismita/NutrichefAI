@@ -40,11 +40,6 @@ const sections = [
                 path: "/pantry",
                 icon: <FaBoxOpen />,
             },
-            {
-                label: "Expiry",
-                path: "/expiry",
-                icon: <FaClock />,
-            },
         ],
     },
     {
@@ -60,10 +55,20 @@ const sections = [
                 path: "/cooking-guide",
                 icon: <FaBookOpen />,
             },
+        ],
+    },
+    {
+        title: "SAVE FOOD",
+        items: [
             {
                 label: "Leftovers",
                 path: "/leftovers",
                 icon: <FaRecycle />,
+            },
+            {
+                label: "Expiring",
+                path: "/expiry",
+                icon: <FaClock />,
             },
         ],
     },

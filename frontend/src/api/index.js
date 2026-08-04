@@ -5,3 +5,4 @@ export * from "./assistantApi";
 export * from "./cookingGuideApi";
 export * from "./nutritionApi";
 export * from "./expiryApi";
+export * from "./leftoverApi";
