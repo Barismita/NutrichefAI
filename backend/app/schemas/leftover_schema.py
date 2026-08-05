@@ -74,6 +74,29 @@ class SuggestedRecipe(BaseModel):
         description="Tip to reduce food waste",
     )
 
+    steps: List[str] = Field(
+        default_factory=list,
+        description="Step-by-step cooking instructions",
+    )
+
+    prep_time: int = Field(
+        ...,
+        ge=1,
+        description="Preparation time in minutes",
+    )
+
+    cook_time: int = Field(
+        ...,
+        ge=1,
+        description="Cooking time in minutes",
+    )
+
+    servings: int = Field(
+        ...,
+        ge=1,
+        description="Number of servings",
+    )
+
 
 # --------------------------------------------------------------------
 # Response

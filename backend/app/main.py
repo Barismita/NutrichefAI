@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -12,6 +13,8 @@ from app.api.recipe_generation_api import router as recipe_generation_router
 from app.api.saved_recipe_api import router as saved_recipe_router
 from app.config.settings import settings
 from app.database.mongodb import init_db
+
+load_dotenv()
 
 
 @asynccontextmanager

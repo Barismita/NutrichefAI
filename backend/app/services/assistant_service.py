@@ -6,7 +6,7 @@ from app.schemas.assistant_schema import (
     AssistantChatRequest,
     AssistantChatResponse,
 )
-from app.services.ai_provider import AIProvider
+from app.services.ai_service import AIService
 from app.utils.assistant_prompt_builder import build_assistant_prompt
 
 
@@ -19,10 +19,9 @@ async def chat_with_assistant(
 
     prompt = build_assistant_prompt(request)
 
-    provider = AIProvider()
-
+    ai_service = AIService()
     try:
-        ai_response = await provider.generate(prompt)
+        ai_response = await ai_service.generate(prompt)
     except Exception as e:
         raise HTTPException(
             status_code=502,

@@ -15,7 +15,6 @@ import {
     FaHome,
     FaRecycle,
     FaRobot,
-    FaUser,
     FaUtensils,
 } from "react-icons/fa";
 
@@ -79,16 +78,6 @@ const sections = [
                 label: "Assistant",
                 path: "/assistant",
                 icon: <FaRobot />,
-            },
-        ],
-    },
-    {
-        title: "ACCOUNT",
-        items: [
-            {
-                label: "Profiles",
-                path: "/profiles",
-                icon: <FaUser />,
             },
         ],
     },
@@ -192,23 +181,6 @@ export default function Sidebar() {
                         </List>
                     </Box>
                 ))}
-
-                <Box
-                    sx={{
-                        mt: 4,
-                        pt: 2,
-                        borderTop: "1px solid #E5E7EB",
-                        textAlign: "center",
-                    }}
-                >
-                    <Typography fontWeight={700} fontSize={15} color="#355E3B">
-                        NutriChef AI
-                    </Typography>
-
-                    <Typography variant="caption" color="text.secondary">
-                        Version 1.0.0
-                    </Typography>
-                </Box>
             </Box>
         </Drawer>
     );

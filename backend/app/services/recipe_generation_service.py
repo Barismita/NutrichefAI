@@ -7,7 +7,7 @@ from app.schemas.recipe_generation_schema import (
     RecipeGenerationRequest,
     RecipeGenerationResponse,
 )
-from app.services.ai_provider import AIProvider
+from app.services.ai_service import AIService
 from app.utils.recipe_prompt_builder import build_recipe_generation_prompt
 
 
@@ -22,10 +22,10 @@ async def generate_recipe(request: RecipeGenerationRequest) -> RecipeGenerationR
         servings=request.servings,
         use_pantry=request.use_pantry,
     )
-    provider = AIProvider()
 
+    ai_service = AIService()
     try:
-        ai_response = await provider.generate(prompt)
+        ai_response = await ai_service.generate(prompt)
     except Exception as e:
         traceback.print_exc()
         raise

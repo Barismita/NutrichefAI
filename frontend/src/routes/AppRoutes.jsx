@@ -4,7 +4,6 @@ import { AppLayout } from "../components/layout";
 import Dashboard from "../pages/Dashboard";
 import Pantry from "../pages/Pantry";
 import Recipes from "../pages/Recipes";
-import Profiles from "../pages/Profiles";
 import Nutrition from "../pages/Nutrition";
 import CookingGuide from "../pages/CookingGuide";
 import Leftover from "../pages/Leftover";
@@ -23,7 +22,6 @@ export default function AppRoutes() {
 
                     <Route path="/pantry" element={<Pantry />} />
                     <Route path="/recipes" element={<Recipes />} />
-                    <Route path="/profiles" element={<Profiles />} />
                     <Route path="/nutrition" element={<Nutrition />} />
                     <Route path="/cooking-guide" element={<CookingGuide />} />
                     <Route path="/leftovers" element={<Leftover />} />

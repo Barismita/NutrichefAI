@@ -239,7 +239,13 @@ export default function PantryTable({ ingredients, onDelete, onEdit }) {
                             </TableCell>
 
                             <TableCell align="center">
-                                <Box display="flex" justifyContent="center" gap={1}>
+                                <Box
+                                    gap={1}
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                    }}
+                                >
                                     <Tooltip title="Edit Ingredient">
                                         <IconButton size="small" onClick={() => onEdit(ingredient)}>
                                             <FaEdit />

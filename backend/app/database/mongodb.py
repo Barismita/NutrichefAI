@@ -9,8 +9,6 @@ from app.models.saved_recipe_model import SavedRecipe
 client = AsyncMongoClient(settings.mongo_uri)
 
 database = client[settings.database_name]
-print("Database:", settings.database_name)
-print("Mongo URI:", settings.mongo_uri)
 
 
 async def init_db():
