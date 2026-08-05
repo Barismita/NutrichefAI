@@ -6,7 +6,7 @@ from app.schemas.leftover_schema import (
     LeftoverRecipeRequest,
     LeftoverRecipeResponse,
 )
-from app.services.ai_provider import AIProvider
+from app.services.ai_service import AIService
 from app.utils.leftover_prompt_builder import (
     build_leftover_prompt,
 )
@@ -21,10 +21,9 @@ async def suggest_leftover_recipes(
 
     prompt = build_leftover_prompt(request)
 
-    provider = AIProvider()
-
+    ai_service = AIService()
     try:
-        ai_response = await provider.generate(prompt)
+        ai_response = await ai_service.generate(prompt)
     except Exception as e:
         raise HTTPException(
             status_code=502,
@@ -62,8 +61,12 @@ async def suggest_leftover_recipes(
         "description",
         "difficulty",
         "estimated_time",
+        "prep_time",
+        "cook_time",
+        "servings",
         "required_ingredients",
         "optional_ingredients",
+        "steps",
         "waste_reduction_tip",
     ]
 
@@ -92,6 +95,12 @@ async def suggest_leftover_recipes(
             raise HTTPException(
                 status_code=502,
                 detail="optional_ingredients must be a list.",
+            )
+
+        if not isinstance(recipe["steps"], list):
+            raise HTTPException(
+                status_code=502,
+                detail="steps must be a list.",
             )
 
         if not isinstance(recipe["estimated_time"], (int, float)):

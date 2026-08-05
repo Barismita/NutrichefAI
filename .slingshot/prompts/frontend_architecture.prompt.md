@@ -79,7 +79,7 @@ Current pages include:
 - Leftover
 - Expiry
 - AI Assistant
-- Profile
+- Profiles
 
 Routes should remain centralized within the routing module.
 

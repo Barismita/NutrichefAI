@@ -31,7 +31,7 @@ async def list_recipes(
     difficulty: Optional[str] = Query(None),
     dietary_tag: Optional[str] = Query(None),
 ):
-    recipes = await get_recipes(cuisine, difficulty, dietary_tag)
+    recipes = await get_recipes(difficulty, dietary_tag)
     return [RecipeResponse.model_validate(r) for r in recipes]
 
 

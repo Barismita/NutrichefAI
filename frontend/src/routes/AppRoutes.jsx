@@ -1,10 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import Home from "../pages/Home";
+import { AppLayout } from "../components/layout";
 import Dashboard from "../pages/Dashboard";
 import Pantry from "../pages/Pantry";
 import Recipes from "../pages/Recipes";
-import Profile from "../pages/Profile";
 import Nutrition from "../pages/Nutrition";
 import CookingGuide from "../pages/CookingGuide";
 import Leftover from "../pages/Leftover";
@@ -15,16 +14,20 @@ export default function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/pantry" element={<Pantry />} />
-                <Route path="/recipes" element={<Recipes />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/nutrition" element={<Nutrition />} />
-                <Route path="/cooking-guide" element={<CookingGuide />} />
-                <Route path="/leftover" element={<Leftover />} />
-                <Route path="/expiry" element={<Expiry />} />
-                <Route path="/assistant" element={<Assistant />} />
+                {/* All application pages */}
+                <Route element={<AppLayout />}>
+                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+                    <Route path="/dashboard" element={<Dashboard />} />
+
+                    <Route path="/pantry" element={<Pantry />} />
+                    <Route path="/recipes" element={<Recipes />} />
+                    <Route path="/nutrition" element={<Nutrition />} />
+                    <Route path="/cooking-guide" element={<CookingGuide />} />
+                    <Route path="/leftovers" element={<Leftover />} />
+                    <Route path="/expiry" element={<Expiry />} />
+                    <Route path="/assistant" element={<Assistant />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     );

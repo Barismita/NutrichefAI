@@ -6,7 +6,7 @@ from app.schemas.expiry_schema import (
     ExpiryRequest,
     ExpiryResponse,
 )
-from app.services.ai_provider import AIProvider
+from app.services.ai_service import AIService
 from app.utils.expiry_prompt_builder import (
     build_expiry_prompt,
 )
@@ -21,10 +21,9 @@ async def analyze_expiry(
 
     prompt = build_expiry_prompt(request)
 
-    provider = AIProvider()
-
+    ai_service = AIService()
     try:
-        ai_response = await provider.generate(prompt)
+        ai_response = await ai_service.generate(prompt)
     except Exception as e:
         raise HTTPException(
             status_code=502,

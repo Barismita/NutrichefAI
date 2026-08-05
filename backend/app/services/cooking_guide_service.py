@@ -11,6 +11,7 @@ from app.schemas.cooking_guide_schema import (
     StepNavigationRequest,
 )
 from app.services.ai_provider import AIProvider
+from app.services.ai_service import AIService
 from app.utils.cooking_guide_prompt_builder import (
     build_question_prompt,
     build_step_prompt,
@@ -104,10 +105,9 @@ async def answer_question(
 
     prompt = build_question_prompt(request)
 
-    provider = AIProvider()
-
+    ai_service = AIService()
     try:
-        ai_response = await provider.generate(prompt)
+        ai_response = await ai_service.generate(prompt)
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,
@@ -152,10 +152,9 @@ async def _generate_step_response(
     Generate a validated cooking step response using AI.
     """
 
-    provider = AIProvider()
-
+    ai_service = AIService()
     try:
-        ai_response = await provider.generate(prompt)
+        ai_response = await ai_service.generate(prompt)
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,

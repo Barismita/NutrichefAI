@@ -8,7 +8,7 @@ from app.schemas.nutrition_schema import (
     NutritionAnalysisRequest,
     NutritionAnalysisResponse,
 )
-from app.services.ai_provider import AIProvider
+from app.services.ai_service import AIService
 from app.utils.nutrition_prompt_builder import (
     build_healthy_alternatives_prompt,
     build_nutrition_analysis_prompt,
@@ -24,10 +24,9 @@ async def analyze_nutrition(
 
     prompt = build_nutrition_analysis_prompt(request)
 
-    provider = AIProvider()
-
+    ai_service = AIService()
     try:
-        ai_response = await provider.generate(prompt)
+        ai_response = await ai_service.generate(prompt)
     except Exception as e:
         raise HTTPException(
             status_code=502,
@@ -99,10 +98,9 @@ async def suggest_healthy_alternatives(
 
     prompt = build_healthy_alternatives_prompt(request)
 
-    provider = AIProvider()
-
+    ai_service = AIService()
     try:
-        ai_response = await provider.generate(prompt)
+        ai_response = await ai_service.generate(prompt)
     except Exception as e:
         raise HTTPException(
             status_code=502,
