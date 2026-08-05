@@ -15,9 +15,6 @@ class AIService:
 
     @classmethod
     def get_providers(cls):
-        print("PRIMARY_AI_PROVIDER =", os.getenv("PRIMARY_AI_PROVIDER"))
-        print("FALLBACK_AI_PROVIDER =", os.getenv("FALLBACK_AI_PROVIDER"))
-        print("LOCAL_AI_PROVIDER =", os.getenv("LOCAL_PROVIDER"))
         providers = []
 
         for key in ["PRIMARY_AI_PROVIDER", "FALLBACK_AI_PROVIDER", "LOCAL_PROVIDER"]:
@@ -25,7 +22,6 @@ class AIService:
 
             if provider_name and provider_name in cls.provider_map:
                 providers.append(cls.provider_map[provider_name]())
-        print("Providers:", [p.__class__.__name__ for p in providers])
         return providers
 
     @classmethod

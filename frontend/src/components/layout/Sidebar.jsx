@@ -8,15 +8,7 @@ import {
     Typography,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import {
-    FaBookOpen,
-    FaBoxOpen,
-    FaClock,
-    FaHome,
-    FaRecycle,
-    FaRobot,
-    FaUtensils,
-} from "react-icons/fa";
+import { FaBoxOpen, FaClock, FaHome, FaRecycle, FaRobot, FaUtensils } from "react-icons/fa";
 
 const drawerWidth = 240;
 
@@ -48,11 +40,6 @@ const sections = [
                 label: "Recipes",
                 path: "/recipes",
                 icon: <FaUtensils />,
-            },
-            {
-                label: "Cooking Guide",
-                path: "/cooking-guide",
-                icon: <FaBookOpen />,
             },
         ],
     },

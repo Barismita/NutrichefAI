@@ -139,7 +139,14 @@ export default function Expiry() {
 
             <Card sx={{ mb: 3 }}>
                 <CardContent>
-                    <Box display="flex" alignItems="center" gap={1} mb={2}>
+                    <Box
+                        gap={1}
+                        mb={2}
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
                         <FaTrashAlt color="#ef4444" />
 
                         <Typography variant="h6" fontWeight={600}>
@@ -168,7 +175,14 @@ export default function Expiry() {
 
             <Card sx={{ mb: 4 }}>
                 <CardContent>
-                    <Box display="flex" alignItems="center" gap={1} mb={2}>
+                    <Box
+                        gap={1}
+                        mb={2}
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
                         <FaExclamationTriangle color="#f59e0b" />
 
                         <Typography variant="h6" fontWeight={600}>
