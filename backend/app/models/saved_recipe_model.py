@@ -6,22 +6,26 @@ from pydantic import Field
 
 class SavedRecipe(Document):
     title: str
-    description: str
+    description: str = ""
 
-    ingredients: list[str] = Field(default_factory=list)
-    instructions: list[str] = Field(default_factory=list)
+    difficulty: str = ""
 
-    cooking_time_minutes: int
-    servings: int
+    estimated_time: int = 0
+    prep_time: int = 0
+    cook_time: int = 0
 
-    difficulty: str
-    cuisine: str
+    servings: int = 1
 
-    dietary_tags: list[str] = Field(default_factory=list)
+    required_ingredients: list[str] = Field(default_factory=list)
+    optional_ingredients: list[str] = Field(default_factory=list)
+
+    steps: list[str] = Field(default_factory=list)
 
     nutrition: dict = Field(default_factory=dict)
 
-    image_prompt: str = ""
+    waste_reduction_tip: str = ""
+
+    source: str = "generated"
 
     created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 

@@ -29,10 +29,6 @@ export default function Nutrition() {
 
     const [error, setError] = useState("");
 
-    useEffect(() => {
-        loadPantry();
-    }, []);
-
     async function loadPantry() {
         try {
             const response = await getPantry();
@@ -47,6 +43,9 @@ export default function Nutrition() {
             console.error(err);
         }
     }
+    useEffect(() => {
+        loadPantry();
+    }, []);
 
     const handleAnalyze = async () => {
         try {
@@ -154,51 +153,112 @@ export default function Nutrition() {
                                         Nutrition Facts
                                     </Typography>
 
-                                    <Stack
-                                        direction={{
-                                            xs: "column",
-                                            md: "row",
-                                        }}
-                                        spacing={2}
-                                        useFlexGap
-                                        mb={3}
+                                    <Box
                                         sx={{
-                                            display: "flex",
-                                            flexWrap: "wrap",
+                                            display: "grid",
+                                            gridTemplateColumns: {
+                                                xs: "repeat(2, 1fr)",
+                                                md: "repeat(4, 1fr)",
+                                            },
+                                            gap: 2,
+                                            mb: 4,
+                                        }}
+                                    >
+                                        {[
+                                            {
+                                                label: "Calories",
+                                                value: nutrition.nutrition.calories,
+                                                unit: "kcal",
+                                                color: "#1976d2",
+                                            },
+                                            {
+                                                label: "Protein",
+                                                value: nutrition.nutrition.protein,
+                                                unit: "g",
+                                                color: "#2e7d32",
+                                            },
+                                            {
+                                                label: "Carbs",
+                                                value: nutrition.nutrition.carbohydrates,
+                                                unit: "g",
+                                                color: "#ed6c02",
+                                            },
+                                            {
+                                                label: "Fat",
+                                                value: nutrition.nutrition.fat,
+                                                unit: "g",
+                                                color: "#9c27b0",
+                                            },
+                                        ].map((item) => (
+                                            <Card
+                                                key={item.label}
+                                                elevation={2}
+                                                sx={{
+                                                    borderRadius: 3,
+                                                    textAlign: "center",
+                                                    py: 2,
+                                                }}
+                                            >
+                                                <CardContent>
+                                                    <Typography
+                                                        variant="subtitle1"
+                                                        color="text.secondary"
+                                                        fontWeight={600}
+                                                    >
+                                                        {item.label}
+                                                    </Typography>
+
+                                                    <Typography
+                                                        variant="h3"
+                                                        fontWeight={700}
+                                                        sx={{
+                                                            color: item.color,
+                                                            my: 1,
+                                                        }}
+                                                    >
+                                                        {item.value}
+                                                    </Typography>
+
+                                                    <Typography
+                                                        variant="body2"
+                                                        color="text.secondary"
+                                                    >
+                                                        {item.unit}
+                                                    </Typography>
+                                                </CardContent>
+                                            </Card>
+                                        ))}
+                                    </Box>
+
+                                    <Box
+                                        sx={{
+                                            display: "grid",
+                                            gridTemplateColumns: {
+                                                xs: "repeat(3, 1fr)",
+                                                md: "repeat(3, 1fr)",
+                                            },
+                                            gap: 2,
+                                            mb: 4,
                                         }}
                                     >
                                         <Chip
-                                            color="primary"
-                                            label={`Calories: ${nutrition.nutrition.calories}`}
-                                        />
-
-                                        <Chip
-                                            color="success"
-                                            label={`Protein: ${nutrition.nutrition.protein} g`}
-                                        />
-
-                                        <Chip
-                                            color="warning"
-                                            label={`Carbs: ${nutrition.nutrition.carbohydrates} g`}
-                                        />
-
-                                        <Chip
-                                            color="secondary"
-                                            label={`Fat: ${nutrition.nutrition.fat} g`}
-                                        />
-
-                                        <Chip
                                             color="info"
                                             label={`Fibre: ${nutrition.nutrition.fibre} g`}
+                                            sx={{ justifyContent: "center", py: 2 }}
                                         />
 
                                         <Chip
                                             color="error"
                                             label={`Sugar: ${nutrition.nutrition.sugar} g`}
+                                            sx={{ justifyContent: "center", py: 2 }}
                                         />
 
-                                        <Chip label={`Sodium: ${nutrition.nutrition.sodium} mg`} />
-                                    </Stack>
+                                        <Chip
+                                            color="default"
+                                            label={`Sodium: ${nutrition.nutrition.sodium} mg`}
+                                            sx={{ justifyContent: "center", py: 2 }}
+                                        />
+                                    </Box>
 
                                     <Typography variant="h6" gutterBottom>
                                         Health Score

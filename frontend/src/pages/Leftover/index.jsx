@@ -73,6 +73,8 @@ export default function Leftover() {
         navigate("/cooking-guide", {
             state: {
                 recipe: selectedRecipe,
+                allowSave: true,
+                source: "leftover",
             },
         });
 
@@ -210,14 +212,18 @@ export default function Leftover() {
 
                             setSelectedIngredients(unique);
                         }}
-                        renderValue={(selected, getItemProps) =>
-                            selected.map((option, index) => (
+                        renderValue={(selected) =>
+                            selected.map((option) => (
                                 <Chip
-                                    {...getItemProps(index)}
                                     key={option}
                                     label={option}
                                     color="success"
                                     size="small"
+                                    onDelete={() =>
+                                        setSelectedIngredients((prev) =>
+                                            prev.filter((item) => item !== option)
+                                        )
+                                    }
                                     sx={{
                                         fontWeight: 500,
                                         m: 0.4,
@@ -341,7 +347,11 @@ export default function Leftover() {
                                             mb={2}
                                             sx={{ display: "flex", flexWrap: "wrap" }}
                                         >
-                                            {recipe.required_ingredients.map((item) => (
+                                            {(
+                                                recipe.required_ingredients ??
+                                                recipe.ingredients ??
+                                                []
+                                            ).map((item) => (
                                                 <Chip key={item} label={item} color="success" />
                                             ))}
                                         </Stack>

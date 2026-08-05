@@ -1,5 +1,5 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { FaHeart, FaHistory } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { LuCookingPot } from "react-icons/lu";
 
 export default function RecipeTabs({ value, onChange }) {
@@ -50,11 +50,6 @@ export default function RecipeTabs({ value, onChange }) {
             <ToggleButton value={1}>
                 <FaHeart size={20} style={{ marginRight: 10 }} />
                 Saved Recipes
-            </ToggleButton>
-
-            <ToggleButton value={2}>
-                <FaHistory size={20} style={{ marginRight: 10 }} />
-                History
             </ToggleButton>
         </ToggleButtonGroup>
     );

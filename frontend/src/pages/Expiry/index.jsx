@@ -17,7 +17,7 @@ import {
     Typography,
 } from "@mui/material";
 import { FaExclamationTriangle, FaTrashAlt, FaUtensils } from "react-icons/fa";
-import { getPantry } from "../../api";
+import { generateRecipe, getPantry } from "../../api";
 
 export default function Expiry() {
     const navigate = useNavigate();
@@ -75,12 +75,25 @@ export default function Expiry() {
         }
     };
 
-    const handleGenerateRecipe = () => {
-        navigate("/recipes", {
-            state: {
+    const handleGenerateRecipe = async () => {
+        try {
+            const response = await generateRecipe({
                 ingredients: expiringSoon.map((item) => item.name),
-            },
-        });
+            });
+
+            const recipe = response.recipe ?? response;
+
+            navigate("/cooking-guide", {
+                state: {
+                    recipe,
+                    allowSave: true,
+                    source: "expiry",
+                },
+            });
+        } catch (err) {
+            console.error(err);
+            setError("Failed to generate recipe.");
+        }
     };
 
     if (loading) {
@@ -223,7 +236,7 @@ export default function Expiry() {
                 size="large"
                 startIcon={<FaUtensils />}
                 onClick={handleGenerateRecipe}
-                disabled={expiringSoon.length === 0}
+                disabled={loading || expiringSoon.length === 0}
             >
                 Generate Recipe Using Expiring Ingredients
             </Button>

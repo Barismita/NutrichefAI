@@ -2,20 +2,19 @@ import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 
 import RecipeGenerator from "./RecipeGenerator";
-import RecipeEmpty from "./RecipeEmpty";
-import RecipeDetails from "./RecipeDetails";
 import RecipeHistory from "./RecipeHistory";
 import SavedRecipes from "./SavedRecipes";
 import RecipeTabs from "./RecipeTabs";
 import RecipeLoading from "./RecipeLoading";
 import RecipeHeader from "./RecipeHeader";
 import { deleteSavedRecipe, getSavedRecipes } from "../../api/index.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Recipes() {
     const [recipe, setRecipe] = useState(null);
     const [loading, setLoading] = useState(false);
     const [tab, setTab] = useState(0);
-
+    const navigate = useNavigate();
     const [savedRecipes, setSavedRecipes] = useState([]);
     const handleDeleteRecipe = async (recipeId) => {
         try {
@@ -46,10 +45,6 @@ export default function Recipes() {
     }, []);
     const [history, setHistory] = useState([]);
     const handleRecipeGenerated = (generatedRecipe) => {
-        console.log("Parent received:", generatedRecipe);
-
-        setRecipe(generatedRecipe);
-
         setHistory((prev) => [
             {
                 ...generatedRecipe,
@@ -59,12 +54,14 @@ export default function Recipes() {
         ]);
 
         setLoading(false);
-    };
-    const handleGenerateAgain = () => {
-        setRecipe(null);
-    };
-    const handleRecipeSaved = () => {
-        loadSavedRecipes();
+
+        navigate("/cooking-guide", {
+            state: {
+                recipe: generatedRecipe,
+                allowSave: true,
+                source: "generator",
+            },
+        });
     };
 
     return (
@@ -87,29 +84,10 @@ export default function Recipes() {
                     />
 
                     {loading && <RecipeLoading />}
-
-                    {!loading && !recipe && <RecipeEmpty />}
-
-                    {!loading && recipe && (
-                        <RecipeDetails
-                            recipe={recipe}
-                            onGenerateAgain={handleGenerateAgain}
-                            onSave={handleRecipeSaved}
-                        />
-                    )}
                 </>
             )}
 
-            {tab === 1 && (
-                <SavedRecipes
-                    recipes={savedRecipes}
-                    onView={(savedRecipe) => {
-                        setRecipe(savedRecipe);
-                        setTab(0);
-                    }}
-                    onDelete={handleDeleteRecipe}
-                />
-            )}
+            {tab === 1 && <SavedRecipes recipes={savedRecipes} onDelete={handleDeleteRecipe} />}
 
             {tab === 2 && <RecipeHistory history={history} />}
         </Box>

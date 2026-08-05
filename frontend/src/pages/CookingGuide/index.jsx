@@ -1,11 +1,40 @@
 import { useLocation } from "react-router-dom";
-import { Alert, Box, Card, CardContent, Chip, Divider, Stack, Typography } from "@mui/material";
+import {
+    Alert,
+    Box,
+    Button,
+    Card,
+    CardContent,
+    Chip,
+    Divider,
+    Stack,
+    Typography,
+} from "@mui/material";
+import { useState } from "react";
+import { saveRecipe } from "../../api/index.js";
 
 export default function CookingGuide() {
     const { state } = useLocation();
-
+    const allowSave = state?.allowSave;
     const recipe = state?.recipe;
+    const ingredients = recipe?.required_ingredients ?? recipe?.ingredients ?? [];
 
+    const steps = recipe?.steps ?? recipe?.instructions ?? [];
+
+    const totalTime = recipe?.estimated_time ?? recipe?.cooking_time_minutes ?? 0;
+    const [saving, setSaving] = useState(false);
+    const [saved, setSaved] = useState(false);
+    const handleSave = async () => {
+        try {
+            setSaving(true);
+
+            await saveRecipe(recipe);
+
+            setSaved(true);
+        } finally {
+            setSaving(false);
+        }
+    };
     if (!recipe) {
         return (
             <Box p={4}>
@@ -39,11 +68,14 @@ export default function CookingGuide() {
             >
                 <Chip label={recipe.difficulty} color="primary" />
 
-                <Chip label={`${recipe.estimated_time} mins`} color="success" />
-                <Chip label={`Prep ${recipe.prep_time} mins`} color="warning" />
+                <Chip label={`${totalTime} mins`} color="success" />
+                {recipe.prep_time ? (
+                    <Chip label={`Prep ${recipe.prep_time} mins`} color="warning" />
+                ) : null}
 
-                <Chip label={`Cook ${recipe.cook_time} mins`} color="secondary" />
-
+                {recipe.cook_time ? (
+                    <Chip label={`Cook ${recipe.cook_time} mins`} color="secondary" />
+                ) : null}
                 <Chip label={`${recipe.servings} Servings`} color="info" />
             </Stack>
 
@@ -60,7 +92,7 @@ export default function CookingGuide() {
                         mb={3}
                         sx={{ display: "flex", flexWrap: "wrap" }}
                     >
-                        {recipe.required_ingredients.map((item) => (
+                        {ingredients.map((item) => (
                             <Chip key={item} label={item} color="success" />
                         ))}
                     </Stack>
@@ -71,8 +103,8 @@ export default function CookingGuide() {
                         Cooking Instructions
                     </Typography>
 
-                    {recipe.steps?.length ? (
-                        recipe.steps.map((step, index) => (
+                    {steps.length ? (
+                        steps.map((step, index) => (
                             <Card
                                 key={index}
                                 variant="outlined"
@@ -97,8 +129,18 @@ export default function CookingGuide() {
                     )}
 
                     <Alert severity="success" sx={{ mt: 4 }}>
-                        <strong>Waste Reduction Tip:</strong> {recipe.waste_reduction_tip}
+                        <strong>Waste Reduction Tip:</strong>{" "}
+                        {recipe.waste_reduction_tip ?? "No tip available."}
                     </Alert>
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        color="success"
+                        disabled={!allowSave || saved || saving}
+                        onClick={handleSave}
+                    >
+                        {saved ? "Recipe Saved" : "Save Recipe"}
+                    </Button>
                 </CardContent>
             </Card>
         </Box>

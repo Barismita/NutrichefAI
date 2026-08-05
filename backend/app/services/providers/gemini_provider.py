@@ -14,7 +14,7 @@ class GeminiProvider(BaseAIProvider):
     async def generate(self, prompt: str):
 
         response = self.client.models.generate_content(
-            model="gemini-2.5-flash-lite",
+            model="gemini-3.5-flash-lite",
             contents=prompt,
         )
 

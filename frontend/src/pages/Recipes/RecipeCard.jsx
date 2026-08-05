@@ -25,7 +25,14 @@ export default function RecipeCard({ recipe, onView, onDelete }) {
                     <Chip icon={<FaFire />} label={`${recipe.nutrition?.calories ?? "-"} kcal`} />
                 </Stack>
 
-                <Box display="flex" alignItems="center" gap={1} mb={2}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                    }}
+                    gap={1}
+                    mb={2}
+                >
                     <FaUtensils />
 
                     <Typography variant="body2">{recipe.difficulty}</Typography>

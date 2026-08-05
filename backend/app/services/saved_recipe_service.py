@@ -3,14 +3,7 @@ from app.models.saved_recipe_model import SavedRecipe
 
 async def save_recipe(recipe: dict):
     obj = SavedRecipe(**recipe)
-
-    print("Saving recipe:")
-    print(obj.model_dump())
-
     await obj.insert()
-
-    print("Saved with id:", obj.id)
-
     return obj
 
 
