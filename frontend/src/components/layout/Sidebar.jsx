@@ -58,16 +58,6 @@ const sections = [
             },
         ],
     },
-    {
-        title: "AI",
-        items: [
-            {
-                label: "Assistant",
-                path: "/assistant",
-                icon: <FaRobot />,
-            },
-        ],
-    },
 ];
 
 export default function Sidebar() {
