@@ -46,7 +46,9 @@ app.include_router(expiry_router)
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://nutrichef-ai-rho.vercel.app",
 ]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
