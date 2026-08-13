@@ -187,6 +187,6 @@ Please ensure that all new code:
 
 # Acknowledgments
 
-- Built using **Slingshot AI** by **Publicis Sapient**
+- Built using **Slingshot AI**
 - Powered by **FastAPI**, **React**, **MongoDB Atlas**, and **Beanie ODM**
 - Developed following an AI-assisted Software Development Life Cycle (AI-SDLC)
